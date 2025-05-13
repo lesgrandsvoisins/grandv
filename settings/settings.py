@@ -38,13 +38,12 @@ DEBUG_TOOLBAR = True if os.getenv("DEBUG_TOOLBAR") == "True" else False
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&3flnc9oy4(gv_!7(=86h0b6!3dm+0_m@+1&3t5_fl_5@i%jok'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.getenv("DEBUG") == "True" else False
-DEBUG_TOOLBAR = True if os.getenv("DEBUG_TOOLBAR") == "True" else False
+SECRET_KEY = os.getenv("SECRET_KEY",'django-insecure-&3flnc9oy4(gv_!7(=86h0b6!3dm+0_m@+1&3t5_fl_5@i%jok')
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1, localhost").replace(" ", "").split(",")
+CSRF_TRUSTED_ORIGINS =os.getenv("CSRF_TRUSTED_ORIGINS", "https://127.0.0.1, https://localhost").replace(" ", "").split(",")
+for host in ALLOWED_HOSTS:
+    CSRF_TRUSTED_ORIGINS.append("https://" + host)
 
 HOST_URL = os.getenv("HOST_URL", "localhost")
 WAGTAIL_SITE_NAME = os.getenv("SITE_NAME", "grandsvoisins.com")
@@ -53,16 +52,34 @@ WAGTAILADMIN_BASE_URL = HOST_URL
 # SITE_ID requis pour ALLAUTH
 SITE_ID = os.getenv("SITE_ID", 1)
 
-
 # Application definition
 
 INSTALLED_APPS = [
+    "wagtail.contrib.forms",
+    "wagtail.contrib.redirects",
+    "wagtail.contrib.settings",
+    "wagtail.embeds",
+    "wagtail.sites",
+    "wagtail.users",
+    "wagtail.snippets",
+    "wagtail.documents",
+    "wagtail.images",
+    "wagtail.search",
+    "wagtail.admin",
+    'wagtail.locales',  # Optinal Wagtial locale management UI
+    "wagtail.contrib.simple_translation",
+    "modelcluster",
+    "wagtail",
+    "taggit",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'wagtail_modeladmin',          # if Wagtail >=5.1; Don't repeat if it's there already
+    'wagtailmenus',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +90,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    'django.middleware.locale.LocaleMiddleware', # For automatic language prefix
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -80,17 +99,38 @@ ROOT_URLCONF = 'settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, "templates"),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                "django.template.context_processors.debug",
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
+                'wagtail.contrib.settings.context_processors.settings',
+                'wagtailmenus.context_processors.wagtailmenus',
             ],
         },
     },
 ]
+
+SILENCED_SYSTEM_CHECKS = ["wagtailadmin.W002"] # https://github.com/jazzband/wagtailmenus/issues/464
+
+
+
+# if DEBUG and "localhost" in HOST_NAME:
+if DEBUG_TOOLBAR:
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ];
+    MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ]
+    INTERNAL_IPS = ["127.0.0.1", "localhost "]
+
 
 WSGI_APPLICATION = 'settings.wsgi.application'
 
@@ -176,3 +216,46 @@ MEDIA_URL = "/media/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+# Wagtail settings
+
+WAGTAIL_SITE_NAME = "annuaire.lesgrandsvoisins.com"
+
+# Search
+# https://docs.wagtail.org/en/stable/topics/search/backends.html
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
+    }
+}
+
+
+# Allowed file extensions for documents in the document library.
+# This can be omitted to allow all files, but note that this may present a security risk
+# if untrusted users are allowed to upload files -
+# see https://docs.wagtail.org/en/stable/advanced_topics/deploying.html#user-uploaded-files
+WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
+
+
+# Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "log_file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": "debug.log",
+        },
+    },
+    "loggers": {
+        "openai_logger": {
+            "handlers": ["log_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
