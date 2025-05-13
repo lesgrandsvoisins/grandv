@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
-    'wagtail.locales',  # Optinal Wagtial locale management UI
+    'wagtail.locales',  # Optional Wagtial locale management UI
     "wagtail.contrib.simple_translation",
     "modelcluster",
     "wagtail",
