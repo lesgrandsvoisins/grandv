@@ -1,3 +1,38 @@
+#####################################################################################
+# From Chris
+#####################################################################################
+# I put the virtual environment in a subfolder ./venv
+.venv
+# Media contents are instance-specific
+^/media/README.md
+/media/*
+# stash is for temporary stuff
+stash/*
+#####################################################################################
+# From Wagtail
+#####################################################################################
+__pycache__
+*.pyc
+.DS_Store
+*.swp
+.env
+*.sqlite3
+/venv/
+/.venv/
+/tmp/
+/static/
+/.vagrant/
+/Vagrantfile.local
+node_modules/
+/npm-debug.log
+/.idea/
+.vscode
+coverage
+.python-version
+.vim
+#####################################################################################
+# From Python Github Template
+#####################################################################################
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
