@@ -6,3 +6,7 @@ psycopg2-binary
 django-taggit
 wagtail-modeladmin
 wagtailmenus
+# Public facing server, I think
+python-keycloak
+# Dev
+beautifulsoup4

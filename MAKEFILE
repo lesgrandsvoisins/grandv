@@ -8,3 +8,4 @@ initial:
 	./.venv/bin/python manage.py migrate
 	./.venv/bin/python manage.py collectstatic -c --noinput
 	./.venv/bin/python manage.py createsuperuser --username devadmin --email devadmin@lesgrandsvoisins.com
+

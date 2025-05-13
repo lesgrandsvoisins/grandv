@@ -80,6 +80,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'wagtail_modeladmin',          # if Wagtail >=5.1; Don't repeat if it's there already
     'wagtailmenus',
+    'keycloak',
+    'annuaire',
 ]
 
 MIDDLEWARE = [
