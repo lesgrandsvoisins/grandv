@@ -9,4 +9,4 @@ wagtailmenus
 # Public facing server, I think
 python-keycloak
 # Dev
-beautifulsoup4
+djlint

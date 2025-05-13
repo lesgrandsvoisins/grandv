@@ -51,3 +51,17 @@ def keycloak_login_view(request):
         form = KeycloakLoginForm()
     
     return render(request, 'login.html', {'form': form})
+
+def keycloak_logout_view(request):
+    refresh_token = request.session.get('refresh_token')
+    if refresh_token:
+        try:
+            keycloak = KeycloakService()
+            keycloak.logout(refresh_token)
+        except Exception as e:
+            messages.warning(request, f"Keycloak logout error: {e}")
+    
+    # Clear the session
+    request.session.flush()
+    messages.success(request, "You have been logged out.")
+    return redirect('keycloak_login')  # or wherever your login page is

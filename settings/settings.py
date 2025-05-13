@@ -84,6 +84,15 @@ INSTALLED_APPS = [
     'annuaire',
 ]
 
+KEYCLOAK_CONFIG = {
+    "SERVER_URL": os.getenv("KEYCLOAK_CONFIG_SERVER_URL"),
+    "REALM": os.getenv("KEYCLOAK_CONFIG_REALM"),
+    "CLIENT_ID": os.getenv("KEYCLOAK_CONFIG_CLIENT_ID"),
+    "CLIENT_SECRET_KEY": os.getenv("KEYCLOAK_CONFIG_CLIENT_SECRET_KEY"),
+    "USE_DUMMY": os.getenv("KEYCLOAK_CONFIG_USE_DUMMY")
+}
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
