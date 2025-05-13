@@ -1,0 +1,56 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Dashboard</title>
+    <style>
+        body { font-family: sans-serif; background: #f7f7f7; }
+        .dashboard { display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem; }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            width: 250px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .card.inactive {
+            opacity: 0.5;
+            background: #f0f0f0;
+        }
+        .icon {
+            font-size: 2rem;
+        }
+        .title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .source {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .description {
+            font-size: 0.9rem;
+            color: #444;
+        }
+    </style>
+    <!-- You can include Font Awesome or similar here for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <h2 style="padding-left:1rem;">Application Dashboard</h2>
+    <div class="dashboard">
+        {% for app in apps %}
+            <div class="card {% if not app.is_active %}inactive{% endif %}">
+                <div class="icon"><i class="{{ app.icon }}"></i></div>
+                <div class="title">{{ app.title }}</div>
+                <div class="source">{{ app.source_name }}</div>
+                <div class="description">{{ app.description }}</div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

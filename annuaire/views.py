@@ -11,6 +11,7 @@ from django.shortcuts import render, redirect
 from .forms import KeycloakLoginForm
 from django.contrib import messages
 
+from .models import Application
 
 @csrf_exempt
 def keycloak_login(request):
@@ -65,3 +66,7 @@ def keycloak_logout_view(request):
     request.session.flush()
     messages.success(request, "You have been logged out.")
     return redirect('keycloak_login')  # or wherever your login page is
+
+def dashboard_view(request):
+    apps = Application.objects.all()
+    return render(request, 'dashboard.html', {'apps': apps})
