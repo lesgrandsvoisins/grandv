@@ -18,6 +18,7 @@ from django.contrib import admin as django_admin
 from django.urls import include, path
 # from annuaire import urls as annuaire_urls
 from lesgrandsvoisins.admin import urls as lgvadmin_urls
+from lesgrandsvoisins.home import urls as lesgrandsvoisins_home_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.admin import urls as wagtailadmin_urls
@@ -28,5 +29,6 @@ urlpatterns = [
     path('djangoadmin/', django_admin.site.urls),
     # path("annuaire/", include(annuaire_urls)),
     path("admin/", include(lgvadmin_urls)),
+    path("", include(lesgrandsvoisins_home_urls)),
     path("", include(wagtail_urls)),
 ]

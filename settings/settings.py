@@ -83,6 +83,7 @@ INSTALLED_APPS = [
     'keycloak',
     'lesgrandsvoisins.annuaire',
     'lesgrandsvoisins.admin',
+    'lesgrandsvoisins.home',
 ]
 
 KEYCLOAK_CONFIG = {
