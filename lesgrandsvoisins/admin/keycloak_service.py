@@ -12,7 +12,7 @@ else:
                 server_url=config["SERVER_URL"],
                 client_id=config["CLIENT_ID"],
                 realm_name=config["REALM"],
-                client_secret_key=config.get("CLIENT_SECRET_KEY", None),
+                client_secret_key=config["CLIENT_SECRET_KEY"],
                 verify=True  # Set False if self-signed
             )
 

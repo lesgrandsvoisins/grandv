@@ -2,26 +2,24 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-      {% block content %}
-      <main class="prose">
-    <h1>Login via Keycloak</h1>
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-</main>
-      {% endblock content %}
-</body>
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        {% block content %}
+            <main class="prose dark:prose-invert">
+                <h1>Login via Keycloak</h1>
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+                    </ul>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Login</button>
+                </form>
+            </main>
+        {% endblock content %}
+    </body>
 </html>
