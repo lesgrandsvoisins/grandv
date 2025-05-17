@@ -6,13 +6,14 @@
   </head>
 <body>
   {% block content %}
+  <article class="prose dark:prose-invert">
   <h1>Les Grands Voisins</h1>
   <ul>
     <li><a href="{% url 'lesgrandsvoisins_admin' %}">Les Grands Voisins Admin</a>
     <li><a href="/wagtailadmin/">Wagtail Admin</a>
     <li><a href="/djangoadmin/">Django Admin</a>
   </ul>
-        
+</article>  
   {% endblock content %}
 
 </body>

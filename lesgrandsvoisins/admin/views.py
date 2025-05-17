@@ -68,7 +68,7 @@ def keycloak_logout_view(request):
     return redirect('keycloak_login')  # or wherever your login page is
 
 def dashboard_view(request):
-    apps = Application.objects.all() 
+    apps = Application.objects.all().order_by("title")
     return render(request, 'lesgrandsvoisins/admin/dashboard.html', {'apps': apps, 'title': 'Tableau de bord'})
 
 def index_view(request):

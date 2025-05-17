@@ -55,10 +55,10 @@
     <body>
       {% block content %}
         <h1 style="padding-left:1rem;">Application Dashboard</h1>
-        <div class="flex flex-wrap gap-4 p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
             {% for app in apps %}
-            <a href="{{ app.url }}" class="hover:scale-110">
-                <div class="bg-gray-800 dark:bg-gray-50 rounded-2xl text-gray-50 dark:text-gray-800 hover:border-color-blue-500 p-4 hover:underline {% if not app.is_active %}inactive{% endif %}">
+            <a href="{{ app.url }}" class="hover:border-dashed hover:border-8 hover: border-orange-600 rounded-2xl hover:scale-110 h-full">
+                <div class="h-full bg-gray-800 dark:bg-gray-50 rounded-2xl border-current border-dashed border-orange-600 text-gray-50 dark:text-gray-800 hover:border-color-blue-500 p-4   {% if not app.is_active %}inactive{% endif %}">
                     <i data-feather="{{ app.icon }}" class="h-16 w-16 float-left m-2"></i>
                     <div class="text-2xl">{{ app.title }}</div>
                     <div class="">{{ app.domain }}</div>

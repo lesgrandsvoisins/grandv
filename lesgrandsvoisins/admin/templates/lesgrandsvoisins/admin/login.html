@@ -7,6 +7,7 @@
 </head>
 <body>
       {% block content %}
+      <main class="prose">
     <h1>Login via Keycloak</h1>
     {% if messages %}
         <ul>
@@ -20,6 +21,7 @@
         {{ form.as_p }}
         <button type="submit">Login</button>
     </form>
+</main>
       {% endblock content %}
 </body>
 </html>

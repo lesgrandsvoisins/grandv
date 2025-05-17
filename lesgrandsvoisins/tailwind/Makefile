@@ -6,7 +6,7 @@
 
 # From https://tailwindcss.com/docs/installation/tailwind-cli
 install:
-	cd ../../.. && npm install tailwindcss @tailwindcss/cli
+	npm install tailwindcss @tailwindcss/cli @tailwindcss/typography
 
 # From https://tailwindcss.com/docs/installation/tailwind-cli
 compile:

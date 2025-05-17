@@ -64,6 +64,9 @@ h6 {
     font-size: 1.1rem;
 }
 
+footer a {
+    text-decoration: underline;
+}
 
 /* ul {
     @apply list-inside;

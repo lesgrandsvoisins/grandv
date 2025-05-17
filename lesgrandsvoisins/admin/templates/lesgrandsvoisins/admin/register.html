@@ -2,9 +2,10 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head><title>Register</title>
-      {% block end_head %}
-    <script>
+    <head>
+        <title>Register</title>
+        {% block end_head %}
+            <script>
         function autofillUsername() {
             const emailField = document.getElementById("id_email");
             const usernameField = document.getElementById("id_username");
@@ -35,28 +36,28 @@
                 }
             );
         }
-    </script>
-      {% endblock end_head %}
-</head>
-<body>
-      {% block content %}
-    <h1>Register</h1>
-    {% if messages %}
-        {% for msg in messages %}
-            <p>{{ msg }}</p>
-        {% endfor %}
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
-      {% endblock content %}
-      {% block end_body %}
-     <script>
+            </script>
+        {% endblock end_head %}
+    </head>
+    <body>
+        {% block content %}
+            <main class="prose">
+                <h1>Register</h1>
+                {% if messages %}
+                    {% for msg in messages %}<p>{{ msg }}</p>{% endfor %}
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Register</button>
+                </form>
+            </main>
+        {% endblock content %}
+        {% block end_body %}
+            <script>
 document.getElementById("id_email").addEventListener("blur", autofillUsername);
 document.getElementById("id_username").addEventListener("blur", checkUsername);
-    </script>
-{% endblock end_body %}
-</body>
+            </script>
+        {% endblock end_body %}
+    </body>
 </html>
