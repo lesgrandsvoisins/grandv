@@ -1,0 +1,58 @@
+doctype html
+html(lang="fr")
+  head
+    title GrandZine : la Zine des Grands Voisins
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width,initial-scale=1')
+    meta(name='robots' content='index,follow')
+    link(rel='stylesheet' href='static/css/grandzine.css')
+  header.grandzine-head
+    .top-bar(data-type-role='flex-row')
+      .bar-left(data-type-role='flex-column')
+        h1.with-subtitle 
+          a(href="https://www.grandzine.org") GrandZine
+        p.subtitle
+          | Le Zine des Grands Voisins
+      .bar-right(data-type-role='flex-column')
+        a(href="https://www.lesgrandsvoisins.com") 
+          img.logo-lgv(src='assets/logo_lesgrandsvoisins_600_72.inkscape.svg' width='600' height='72')
+    .menu-bar(data-type-role='flex-row')
+      .menu-item(data-type-role='flex-column')
+        a(href='https://www.lesgrandsvoisins.com/fr/annuaire/') Annuaire
+      .menu-item(data-type-role='flex-column')
+        a(href='https://www.lesgrandsvoisins.com/fr/agenda/') Agenda
+      .menu-item(data-type-role='flex-column')
+        a(href='https://blog.lesgrandsvoisins.com') Actualit&eacute;s
+      .menu-item(data-type-role='flex-column')
+        a(href='https://www.lesgrandsvoisins.com/fr/association/') Association
+      .menu-item(data-type-role='flex-column')
+        a(href='https://www.lesgv.com/fr/') Apps
+  main.grandzine-content 
+    h2 Accès pour les Grands Voisins
+    p Chaque personne peut bénéficier d'un compte Les Grands Voisins. Ce compte permet une gestion de services annexes: entrée dans l'annuaire, courriel, ... 
+    h3 Votre compte
+    p Pour vous connecter ou pour créer votre compte, rendez-vous sur 
+      a(href='https://key.lesgrandsvoisins.com') key.lesgrandsvoisins.com
+      | .
+    ul
+      li Les applications accessibles avec votre compte sont visibles dans la rubrique 
+        a(href="https://www.lesgv.com") apps
+      li La création d'un compte est accessible par le lien "
+        b Nouvel utilisateur ? Enregistrement
+        | " vers le bas de la fenêtre avec la possibilité en bas d'utiliser un compte Google ou un compte hotmail existant. (
+        b Attention
+        | , merci de bien penser à cliquer à l'intérieur du courriel de vérification pour bien enregistrer votre compte dans Les Grands Voisins.) 
+    h3 Votre entrée dans l'annuaire 
+    p Pour pouvoir modifier votre fiche dans l'annuaire, il convient de s'identifier dans le site de contenu de l'annuaire 
+      a(href="https://www.lesgrandsvoisins.com/cms-admin/") lesgrandsvoisins.com/cms-admin
+      | . 
+      | Votre compte sera techniquement créé à la première connexion si ce n'est pas encore le cas. Suite à cela, l'administration liera manuellement votre compte avec votre enregistrement dans l'annuaire.
+  footer.grandzine-footer
+    div.utility-bar(data-type-role='flex-row')
+      #theme-controls 
+        button(data-set-theme="light") Clair
+        button(data-set-theme="dark") Foncé
+    p Association coopérative d'intérêt général Les Grands Voisins. 
+      a(href="https://www.lesgrandsvoisins.com") www.lesgrandsvoisins.com
+      | 75014 Paris, France. +33 7 81 811 811.
+  script(src='static/js/grandzine.js')

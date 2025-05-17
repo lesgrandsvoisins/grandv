@@ -1,0 +1,18 @@
+---
+unified font repository version: "0.2"
+unified font repository url: https://github.com/raphaelbastide/Unified-Font-Repository/
+typeface family:
+  name: Grotesk
+  tags:
+  - sans serif
+  - geometric
+  - art déco
+  project url: https://gitlab.com/velvetyne/grotesk
+  project status: published
+  tools:
+  - Fontforge
+  - Glyphs
+  similar fonts:
+  sample text:
+  - en_us: Sphinx of black quartz, judge my vow.
+...

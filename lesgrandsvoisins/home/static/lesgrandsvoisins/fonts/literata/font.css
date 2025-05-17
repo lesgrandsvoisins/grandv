@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'literata';
+    src: url('Literata-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'literata';
+    src: url('Literata-Italic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'literata';
+    src: url('Literata-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'literata';
+    src: url('Literata-Medium_Italic.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'literata';
+    src: url('Literata-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'literata';
+    src: url('Literata-SemiBold_Italic.woff2') format('woff2');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'literata';
+    src: url('Literata-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'literata';
+    src: url('Literata-Bold_Italic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: italic;
+}

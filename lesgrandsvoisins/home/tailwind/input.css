@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@layer base {
+
+    div.decorative_title {
+        @apply mx-auto;
+        @apply max-w-screen-lg;
+        @apply px-3;
+        @apply py-6;
+        @apply mb-6;
+        @apply flex;
+        @apply items-baseline;
+        @apply justify-between;
+    }
+
+    h2 {
+        @apply text-2xl;
+        @apply font-bold;
+    }
+
+    h2>b {
+        @apply bg-gradient-to-br;
+        @apply from-sky-500;
+        @apply to-cyan-400;
+        @apply bg-clip-text;
+        @apply text-transparent;
+    }
+
+    /* div.decorative_title>span.cta {
+        @apply test-small;
+    } */
+
+    div.decorative_title>div>a::after {
+        content: " →";
+    }
+
+}
+
+@layer utilities {
+    .tag-web {
+        color: var(--color-fuchsia-900);
+        background: var(--color-fuchsia-400);
+    }
+
+    .tag-ia {
+        color: var(--color-lime-900);
+        background-color: var(--color-lime-400);
+    }
+}
+
+/* div.resdigita-heading span {
+    bg-gradient-to-br from-sky-500 to-cyan-400 bg-clip-text text-transparent
+} */

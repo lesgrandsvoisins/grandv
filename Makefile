@@ -7,8 +7,10 @@ initial:
 	echo "SECRET_KEY="`./.venv/bin/python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'` >> .env
 	make update
 	./.venv/bin/python manage.py createsuperuser --username devadmin --email devadmin@lesgrandsvoisins.com
+	make -C lesgrandsvoisins home_tailwind_install
 
 update:
+	make -C lesgrandsvoisins home_tailwind_compile
 	./.venv/bin/python manage.py makemigrations
 	./.venv/bin/python manage.py migrate
 	./.venv/bin/python manage.py collectstatic -c --noinput

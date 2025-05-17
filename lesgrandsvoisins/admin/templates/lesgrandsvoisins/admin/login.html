@@ -1,11 +1,13 @@
-<!-- templates/login.html -->
+{% extends "base.html" %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Login</title>
 </head>
 <body>
-    <h2>Login via Keycloak</h2>
+      {% block content %}
+    <h1>Login via Keycloak</h1>
     {% if messages %}
         <ul>
             {% for message in messages %}
@@ -20,7 +22,6 @@
     </form>
     <hr/>
         <a href="{% url 'keycloak_register' %}">Register</a>
-
-    
+      {% endblock content %}
 </body>
 </html>

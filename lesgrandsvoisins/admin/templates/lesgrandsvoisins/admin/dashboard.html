@@ -1,9 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>Application Dashboard</title>
+        {% block extra_head %}
         <style>
-        body { font-family: sans-serif; background: #f7f7f7; }
         .dashboard { display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem; }
         .card {
             background: white;
@@ -39,9 +41,11 @@
         <!-- You can include Font Awesome or similar here for icons -->
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        {% endblock extra_head %}
     </head>
     <body>
-        <h2 style="padding-left:1rem;">Application Dashboard</h2>
+      {% block content %}
+        <h1 style="padding-left:1rem;">Application Dashboard</h1>
         <div class="dashboard">
             {% for app in apps %}
                 <div class="card {% if not app.is_active %}inactive{% endif %}">
@@ -56,5 +60,6 @@
         </div>
         <hr/>
         <a href="{% url 'keycloak_logout' %}">Logout</a>
+      {% endblock content %}
     </body>
 </html>
