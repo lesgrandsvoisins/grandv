@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 import dj_database_url  # Pour un syntaxe différent de base de données
 from dotenv import load_dotenv  # Pour les variables d'.env
-from setttings import urls
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -276,5 +275,5 @@ LOGGING = {
     },
 }
 
+ROOT_URLCONF = "settings.urls"
 
-ROOT_URLCONF=urls
