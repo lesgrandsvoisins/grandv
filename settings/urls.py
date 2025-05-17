@@ -16,12 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from annuaire import urls as annuaire_urls
+# from annuaire import urls as annuaire_urls
+from lgvadmin import urls as admin_urls
 from wagtail import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.admin import urls as wagtailadmin_urls
+
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("annuaire/", include(annuaire_urls)),
+    path('wagtailadmin/', include(wagtailadmin_urls)),
+    path('wagtaildocs/', include(wagtaildocs_urls)),
+    path('djangoadmin/', admin.site.urls),
+    # path("annuaire/", include(annuaire_urls)),
+    path("admin/", include(admin_urls)),
     path("", include(wagtail_urls)),
 ]

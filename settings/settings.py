@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     'wagtailmenus',
     'keycloak',
     'annuaire',
+    'lgvadmin',
 ]
 
 KEYCLOAK_CONFIG = {
