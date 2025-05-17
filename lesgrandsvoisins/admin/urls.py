@@ -1,11 +1,11 @@
 from django.urls import path
-from .views import keycloak_login, keycloak_login_view, keycloak_logout_view, dashboard_view, login_or_dashboard
+from .views import keycloak_login, keycloak_login_view, keycloak_logout_view, dashboard_view, index_view
 
 urlpatterns = [
     path('api/login/', keycloak_login, name='keycloak_login'),
     path('login/', keycloak_login_view, name='keycloak_login'),
     path('dashboard/', dashboard_view, name='dashboard'),
-    path('', login_or_dashboard, name="login_or_dashboard" )
+    path('', index_view, name="index_view" )
 ]
 
 urlpatterns += [

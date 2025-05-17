@@ -71,8 +71,11 @@ def dashboard_view(request):
     apps = Application.objects.all()
     return render(request, 'lesgrandsvoisins/admin/dashboard.html', {'apps': apps})
 
-def login_or_dashboard(request):
-    if "username" in request.session:
+def index_view(request):
+    if check_logged_in(request):
         return redirect('dashboard')
     else:
         return redirect('keycloak_login')
+
+def check_logged_in(request):
+    return "username" in request.session
