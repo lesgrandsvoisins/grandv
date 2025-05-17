@@ -3,20 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head><title>Register</title>
-      {% block extra_head %}
+      {% block end_head %}
     <script>
         function autofillUsername() {
             const emailField = document.getElementById("id_email");
             const usernameField = document.getElementById("id_username");
             if (emailField && usernameField) {
                 const parts = emailField.value.split("@");
-                if (parts.length > 1 && !usernameField.value) {
+                if (parts.length > 1) { /*  && !usernameField.value */
                     usernameField.value = parts[0];
                 }
             }
         }
     </script>
-      {% endblock extra_head %}
+      {% endblock end_head %}
 </head>
 <body>
       {% block content %}
@@ -31,8 +31,10 @@
         {{ form.as_p }}
         <button type="submit">Register</button>
     </form>
-
+      {% endblock content %}
+      {% block end_body %}
      <script>
+document.getElementById("id_email").addEventListener("blur", autofillUsername);
 document.getElementById("id_username").addEventListener("blur", function () {
     const username = this.value;
     if (username.length < 3) return;
@@ -50,6 +52,6 @@ document.getElementById("id_username").addEventListener("blur", function () {
         });
 });
     </script>
-      {% endblock content %}
+{% endblock end_body %}
 </body>
 </html>

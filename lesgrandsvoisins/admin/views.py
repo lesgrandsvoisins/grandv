@@ -51,7 +51,7 @@ def keycloak_login_view(request):
     else:
         form = KeycloakLoginForm()
     
-    return render(request, 'lesgrandsvoisins/admin/login.html', {'form': form})
+    return render(request, 'lesgrandsvoisins/admin/login.html', {'form': form, 'title': 'Login'})
 
 def keycloak_logout_view(request):
     refresh_token = request.session.get('refresh_token')
@@ -69,7 +69,7 @@ def keycloak_logout_view(request):
 
 def dashboard_view(request):
     apps = Application.objects.all()
-    return render(request, 'lesgrandsvoisins/admin/dashboard.html', {'apps': apps})
+    return render(request, 'lesgrandsvoisins/admin/dashboard.html', {'apps': apps, 'title': 'Tableau de bord'})
 
 def index_view(request):
     if check_logged_in(request):
@@ -94,7 +94,7 @@ def keycloak_register_view(request):
                 messages.error(request, f"Registration failed: {e}")
     else:
         form = KeycloakRegistrationForm()
-    return render(request, "lesgrandsvoisins/admin/register.html", {"form": form})
+    return render(request, "lesgrandsvoisins/admin/register.html", {"form": form, 'title': 'S\'enregistrer'})
 
 def check_username(request):
     username = request.GET.get("username", "").strip()

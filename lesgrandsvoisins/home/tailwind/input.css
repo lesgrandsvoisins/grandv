@@ -1,53 +1,73 @@
 @import "tailwindcss";
 
 @layer base {
+    body {
+        @apply m-8;
+        background: #f7f7f7;
+        font-family: 'fira-sans';
+    }
 
-    div.decorative_title {
-        @apply mx-auto;
-        @apply max-w-screen-lg;
-        @apply px-3;
-        @apply py-6;
-        @apply mb-6;
-        @apply flex;
-        @apply items-baseline;
-        @apply justify-between;
+    label {
+        @apply mt-2;
+        display: block;
+    }
+
+    input {
+        border: 1px solid black;
+        @apply px-2;
+    }
+
+    button {
+        border: 1px solid black;
+        text-align: center;
+        @apply p-2;
+        @apply m-2;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    h7,
+    h8,
+    h9 {
+        font-family: 'grotesk';
+    }
+
+    h1 {
+        font-size: 2.5rem;
     }
 
     h2 {
-        @apply text-2xl;
-        @apply font-bold;
+        font-size: 2.1rem;
     }
 
-    h2>b {
-        @apply bg-gradient-to-br;
-        @apply from-sky-500;
-        @apply to-cyan-400;
-        @apply bg-clip-text;
-        @apply text-transparent;
+    h3 {
+        font-size: 1.8rem;
     }
 
-    /* div.decorative_title>span.cta {
-        @apply test-small;
-    } */
-
-    div.decorative_title>div>a::after {
-        content: " →";
+    h4 {
+        font-size: 1.4rem;
     }
 
-}
-
-@layer utilities {
-    .tag-web {
-        color: var(--color-fuchsia-900);
-        background: var(--color-fuchsia-400);
+    h5 {
+        font-size: 1.2rem;
     }
 
-    .tag-ia {
-        color: var(--color-lime-900);
-        background-color: var(--color-lime-400);
+    h6 {
+        font-size: 1.1rem;
+    }
+
+    a {
+        color: blue;
+        text-decoration: underline;
     }
 }
 
-/* div.resdigita-heading span {
-    bg-gradient-to-br from-sky-500 to-cyan-400 bg-clip-text text-transparent
-} */
+@layer utilities {}
