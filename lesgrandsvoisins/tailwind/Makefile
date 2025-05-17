@@ -10,8 +10,8 @@ install:
 
 # From https://tailwindcss.com/docs/installation/tailwind-cli
 compile:
-	npx @tailwindcss/cli -i ./tailwind/input.css -o ./static/lesgrandsvoisins/home/css/tailwind.css --cwd ..  -m
+	npx @tailwindcss/cli -i ./tailwind/input.css -o ./tailwind/static/lesgrandsvoisins/css/tailwind.css --cwd ..  -m
 
 watch:
-	npx @tailwindcss/cli -i ./tailwind/input.css -o ./static/lesgrandsvoisins/home/css/tailwind.css --cwd .. --watch
+	npx @tailwindcss/cli -i ./tailwind/input.css -o ./tailwind/static/lesgrandsvoisins/css/tailwind.css --cwd .. --watch
 

@@ -13,3 +13,6 @@ Ecans actuellement implémentés sont :
 1. Login
 2. Dashboard
 
+## Icons
+
+<https://feathericons.com/>

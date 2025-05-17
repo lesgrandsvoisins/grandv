@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+    --font-sans: 'fira-sans', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-serif: 'grotesk', Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-mono: 'fira-mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    /* ... */
+}
+
+@layer base {
+
+    /* html.dark input,
+    html.dark button {
+        border-color: white;
+    } */
+
+    /* html.dark a {
+        @apply text-blue-200;
+    } */
+}
+
+@layer utilities {}

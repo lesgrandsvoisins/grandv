@@ -84,6 +84,8 @@ INSTALLED_APPS = [
     'lesgrandsvoisins.annuaire',
     'lesgrandsvoisins.admin',
     'lesgrandsvoisins.home',
+    'lesgrandsvoisins.tailwind',
+    'meta', # django-meta for SEO
 ]
 
 KEYCLOAK_CONFIG = {

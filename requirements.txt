@@ -10,3 +10,5 @@ wagtailmenus
 python-keycloak
 # Dev
 djlint
+# Testing
+django-meta
