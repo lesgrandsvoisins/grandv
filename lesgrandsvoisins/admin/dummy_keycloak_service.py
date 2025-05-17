@@ -1,7 +1,11 @@
 # dummy_keycloak_service.py
+
 class DummyKeycloakService:
+    _users = []
+
     def login(self, username, password):
-        if username == "test" and password == "test":
+        user = next((u for u in self._users if u["username"] == username), None)
+        if user and user["password"] == password:
             return {
                 "access_token": "dummy-access-token",
                 "refresh_token": "dummy-refresh-token"
@@ -19,5 +23,29 @@ class DummyKeycloakService:
         raise Exception("Invalid token")
 
     def logout(self, refresh_token):
-        # No real action needed for dummy
         return {"message": "logged out"}
+
+    def create_user(self, username, password, email=None):
+        if any(u["username"] == username for u in self._users):
+            raise Exception("Username already exists")
+        self._users.append({
+            "username": username,
+            "password": password,
+            "email": email,
+        })
+        return "dummy-user-id"
+
+    def get_users(self, query):
+        username = query.get("username")
+        if username:
+            return [u for u in self._users if u["username"] == username]
+        return self._users
+
+    class admin:
+
+        def get_users(query):
+            username = query.get("username")
+            if username:
+                if username == "test":
+                    return [{"username":"test"}]
+            return []

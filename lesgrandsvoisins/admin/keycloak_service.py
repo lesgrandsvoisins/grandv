@@ -30,3 +30,22 @@ else:
 
         def logout(self, refresh_token):
             return self.keycloak_openid.logout(refresh_token)
+
+        def create_user(self, username, password, email=None):
+            payload = {
+                "username": username,
+                "enabled": True,
+                "credentials": [{
+                    "type": "password",
+                    "value": password,
+                    "temporary": False
+                }]
+            }
+            if email:
+                payload["email"] = email
+
+            try:
+                user_id = self.admin.create_user(payload)
+                return user_id
+            except Exception as e:
+                raise Exception(f"Keycloak registration failed: {e}")

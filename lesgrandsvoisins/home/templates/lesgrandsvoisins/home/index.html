@@ -4,8 +4,14 @@
 <body>
   Les Grands Voisins :
   <ul>
-    <li><a href="/admin/">Les Grands Voisins Admin</a>
+    <li><a href="{% url 'lesgrandsvoisins_admin' %}">Les Grands Voisins Admin</a>
     <li><a href="/wagtailadmin/">Wagtail Admin</a>
     <li><a href="/djangoadmin/">Django Admin</a>
+  </ul>
+    <hr/>
+        <a href="{% url 'keycloak_login' %}">Login</a>
+        <a href="{% url 'keycloak_register' %}">Register</a>
+        <a href="{% url 'keycloak_logout' %}">Logout</a>
+
 </body>
 </html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head><title>Register</title>
+ <script>
+        function autofillUsername() {
+            const emailField = document.getElementById("id_email");
+            const usernameField = document.getElementById("id_username");
+            if (emailField && usernameField) {
+                const parts = emailField.value.split("@");
+                if (parts.length > 1 && !usernameField.value) {
+                    usernameField.value = parts[0];
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Register</h2>
+    {% if messages %}
+        {% for msg in messages %}
+            <p>{{ msg }}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div id="username-msg"></div>
+        <button type="submit">Register</button>
+    </form>
+    <hr/>
+            <a href="{% url 'keycloak_login' %}">Login</a>
+
+     <script>
+document.getElementById("id_username").addEventListener("blur", function () {
+    const username = this.value;
+    if (username.length < 3) return;
+    fetch(`/admin/ajax/check-username/?username=${encodeURIComponent(username)}`)
+        .then(res => res.json())
+        .then(data => {
+            let msg = document.getElementById("username-msg");
+            if (!msg) {
+                msg = document.createElement("div");
+                msg.id = "username-msg";
+                this.parentNode.appendChild(msg);
+            }
+            msg.innerText = data.available ? "✅ Username available" : "❌ Username taken";
+            msg.style.color = data.available ? "green" : "red";
+        });
+});
+    </script>
+</body>
+</html>

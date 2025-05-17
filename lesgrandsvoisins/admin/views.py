@@ -8,7 +8,7 @@ import json
 from .keycloak_service import KeycloakService
 
 from django.shortcuts import render, redirect
-from .forms import KeycloakLoginForm
+from .forms import KeycloakLoginForm, KeycloakRegistrationForm
 from django.contrib import messages
 
 from .models import Application
@@ -79,3 +79,27 @@ def index_view(request):
 
 def check_logged_in(request):
     return "username" in request.session
+
+def keycloak_register_view(request):
+    if request.method == "POST":
+        form = KeycloakRegistrationForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            try:
+                keycloak = KeycloakService()
+                keycloak.create_user(data["username"], data["password"], data.get("email"))
+                messages.success(request, "Registration successful. You may now log in.")
+                return redirect("keycloak_login")
+            except Exception as e:
+                messages.error(request, f"Registration failed: {e}")
+    else:
+        form = KeycloakRegistrationForm()
+    return render(request, "lesgrandsvoisins/admin/register.html", {"form": form})
+
+def check_username(request):
+    username = request.GET.get("username", "").strip()
+    keycloak = KeycloakService()
+    if username:
+        existing_users = keycloak.admin.get_users(query={"username": username})
+        return JsonResponse({"available": len(existing_users) == 0})
+    return JsonResponse({"available": False})
