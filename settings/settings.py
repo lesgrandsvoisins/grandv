@@ -81,8 +81,8 @@ INSTALLED_APPS = [
     'wagtail_modeladmin',          # if Wagtail >=5.1; Don't repeat if it's there already
     'wagtailmenus',
     'keycloak',
-    'annuaire',
-    'lgvadmin',
+    'lesgrandsvoisins.annuaire',
+    'lesgrandsvoisins.admin',
 ]
 
 KEYCLOAK_CONFIG = {
