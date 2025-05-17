@@ -51,7 +51,7 @@ def keycloak_login_view(request):
     else:
         form = KeycloakLoginForm()
     
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'lesgrandsvoisins/admin/login.html', {'form': form})
 
 def keycloak_logout_view(request):
     refresh_token = request.session.get('refresh_token')
@@ -69,4 +69,10 @@ def keycloak_logout_view(request):
 
 def dashboard_view(request):
     apps = Application.objects.all()
-    return render(request, 'dashboard.html', {'apps': apps})
+    return render(request, 'lesgrandsvoisins/admin/dashboard.html', {'apps': apps})
+
+def login_or_dashboard(request):
+    if "username" in request.session:
+        return redirect('dashboard')
+    else:
+        return redirect('keycloak_login')
