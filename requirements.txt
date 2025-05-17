@@ -10,5 +10,8 @@ wagtailmenus
 python-keycloak
 # Dev
 djlint
-# Testing
+django-debug-toolbar
+# Feature for future Testing
 django-meta
+# Production
+gunicorn
