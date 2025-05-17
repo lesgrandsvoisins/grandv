@@ -275,5 +275,3 @@ LOGGING = {
     },
 }
 
-ROOT_URLCONF = "settings.urls"
-
