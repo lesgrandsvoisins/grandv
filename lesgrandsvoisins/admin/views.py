@@ -45,7 +45,7 @@ def keycloak_login_view(request):
                 request.session['access_token'] = token['access_token']
                 request.session['refresh_token'] = token['refresh_token']
                 request.session['username'] = userinfo.get('preferred_username')
-                return redirect('dashboard')  # Replace with your destination view
+                return redirect('lesgrandsvoisins_dashboard')  # Replace with your destination view
             except Exception as e:
                 messages.error(request, f'Login failed: {str(e)}')
     else:
@@ -73,7 +73,7 @@ def dashboard_view(request):
 
 def index_view(request):
     if check_logged_in(request):
-        return redirect('dashboard')
+        return redirect('lesgrandsvoisins_dashboard')
     else:
         return redirect('keycloak_login')
 

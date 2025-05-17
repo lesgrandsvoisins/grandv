@@ -1,7 +1,7 @@
 # dummy_keycloak_service.py
 
 class DummyKeycloakService:
-    _users = []
+    _users = [{"username":"test","password":"test"}]
 
     def login(self, username, password):
         user = next((u for u in self._users if u["username"] == username), None)
@@ -42,7 +42,6 @@ class DummyKeycloakService:
         return self._users
 
     class admin:
-
         def get_users(query):
             username = query.get("username")
             if username:

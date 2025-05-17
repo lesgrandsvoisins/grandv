@@ -14,6 +14,26 @@
                     usernameField.value = parts[0];
                 }
             }
+            checkUsername();
+        }
+
+        function checkUsername() {
+            const usernameField = document.getElementById("id_username");
+            const username = usernameField.value;
+            if (username.length < 3) return;
+            fetch(`/admin/ajax/check-username/?username=${encodeURIComponent(username)}`)
+                .then(res => res.json())
+                .then(data => {
+                    let msg = document.getElementById("username-msg");
+                    if (!msg) {
+                        msg = document.createElement("div");
+                        msg.id = "username-msg";
+                        this.parentNode.appendChild(msg);
+                    }
+                    msg.innerText = data.available ? "✅ Username available" : "❌ Username taken";
+                    msg.style.color = data.available ? "green" : "red";
+                }
+            );
         }
     </script>
       {% endblock end_head %}
@@ -35,22 +55,7 @@
       {% block end_body %}
      <script>
 document.getElementById("id_email").addEventListener("blur", autofillUsername);
-document.getElementById("id_username").addEventListener("blur", function () {
-    const username = this.value;
-    if (username.length < 3) return;
-    fetch(`/admin/ajax/check-username/?username=${encodeURIComponent(username)}`)
-        .then(res => res.json())
-        .then(data => {
-            let msg = document.getElementById("username-msg");
-            if (!msg) {
-                msg = document.createElement("div");
-                msg.id = "username-msg";
-                this.parentNode.appendChild(msg);
-            }
-            msg.innerText = data.available ? "✅ Username available" : "❌ Username taken";
-            msg.style.color = data.available ? "green" : "red";
-        });
-});
+document.getElementById("id_username").addEventListener("blur", checkUsername);
     </script>
 {% endblock end_body %}
 </body>

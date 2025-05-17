@@ -9,6 +9,7 @@ module.exports = {
     theme: {
         extend: {},
     },
+    darkMode: 'class',
     plugins: [
         require('@tailwindcss/aspect-ratio'),
         require('@tailwindcss/typography'),
