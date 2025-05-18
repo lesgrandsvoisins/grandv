@@ -68,6 +68,15 @@ footer a {
     text-decoration: underline;
 }
 
+html[data-theme='dark'] input,
+html[data-theme='dark'] button {
+    border-color: white;
+}
+
+.prose {
+    margin: 0 auto;
+}
+
 /* ul {
     @apply list-inside;
     @apply ml-4;
