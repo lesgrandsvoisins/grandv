@@ -5,18 +5,12 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = {self, nixpkgs, ...}: let
+  outputs = {self, nixpkgs, ...}: 
+  let
     pkgs = nixpkgs.legacyPackages."x86_64-linux";
     packageOverrides = pkgs.callPackage ./python-packages.nix {};
     python = pkgs.python312.override {inherit packageOverrides; };
-  in {
-    devShells.x86_64-linux.default = pkgs.mkShell {
-      env.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-        pkgs.stdenv.cc.cc.lib
-        pkgs.libz
-        pkgs.openldap
-      ];
-      packages = with pkgs; [
+    packages = with pkgs; [
         (python.withPackages (python-pkgs: with python-pkgs; [
           # select Python packages here
           pillow
@@ -50,6 +44,12 @@
           ## django-meta
         ]))
       ];
+  in {
+    devShells.x86_64-linux.default = pkgs.mkShell {
+      packages = packages;
+    };
+    packages.x86_64-linux.default = pkgs.mkShell {
+      packages = packages;
     };
   };
 }
