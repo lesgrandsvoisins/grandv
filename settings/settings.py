@@ -260,11 +260,18 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
         "log_file": {
             "level": "INFO",
             "class": "logging.FileHandler",
             "filename": "debug.log",
         },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "DEBUG",
     },
     "loggers": {
         "openai_logger": {
