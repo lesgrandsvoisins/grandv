@@ -87,7 +87,7 @@ def keycloak_register_view(request):
             data = form.cleaned_data
             try:
                 keycloak = KeycloakService()
-                keycloak.create_user(data["username"], data["password"], data.get("email"))
+                keycloak.create_user(data["username"], data["password"], data.get("email"), data.get("firstname"), data.get("lastname"))
                 messages.success(request, "Registration successful. You may now log in.")
                 return redirect("keycloak_login")
             except Exception as e:
