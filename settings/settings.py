@@ -98,6 +98,15 @@ KEYCLOAK_CONFIG = {
     "USE_DUMMY": True if os.getenv("KEYCLOAK_CONFIG_USE_DUMMY") == "True" else False,
 }
 
+LDAP_CONFIG = {
+    "URL": os.getenv("LDAP_URL"),
+    "BASE_DN": os.getenv("BASE_DN"),
+    "BIND_DN": os.getenv("BIND_DN"),
+    "BIND_PASSWORD": os.getenv("BIND_PASSWORD"),
+    "USERS_OU": os.getenv("USERS_OU"),  # corresponds to ou=users,dc=example,dc=org
+    "GROUPS_OU": os.getenv("GROUPS_OU"),  # corresponds to ou=users,dc=example,dc=org
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

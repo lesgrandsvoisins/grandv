@@ -2,8 +2,8 @@ from django.urls import path
 from .views import keycloak_login, keycloak_login_view, keycloak_logout_view, dashboard_view, index_view, keycloak_register_view, check_username
 
 urlpatterns = [
-    path('api/login/', keycloak_login, name='keycloak_login'),
-    path('login/', keycloak_login_view, name='keycloak_login'),
+    # path('api/login/', keycloak_login, name='keycloak_login'),
+    path('login/', ldap_login_view, name='ldap_login'),
     path('dashboard/', dashboard_view, name='lesgrandsvoisins_dashboard'),
     path('', index_view, name="lesgrandsvoisins_admin" )
 ]

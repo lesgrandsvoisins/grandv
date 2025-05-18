@@ -6,12 +6,49 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .keycloak_service import KeycloakService
+from .ldap_service import LDAPService
 
 from django.shortcuts import render, redirect
 from .forms import KeycloakLoginForm, KeycloakRegistrationForm
 from django.contrib import messages
 
 from .models import Application
+
+
+@csrf_exempt
+def ldap_login(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+
+        ldap = LDAPService()
+        try:
+            return ldap.login(username, password)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=401)
+
+def ldap_login_view(request):
+    if request.method == 'POST':
+        form = KeycloakLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            ldap = LDAPService()
+
+            try:
+                userinfo = keycloak.login(username, password)
+                if userinfo:
+                    request.session['username'] = userinfo['username']
+                    return redirect('lesgrandsvoisins_dashboard')  
+                else:
+                    messages.error(request, f'Login failed: {str(e)}')
+            except Exception as e:
+                messages.error(request, f'Login failed: {str(e)}')
+    else:
+        form = KeycloakLoginForm()
+    
+    return render(request, 'lesgrandsvoisins/admin/login.html', {'form': form, 'title': 'Login'})
 
 @csrf_exempt
 def keycloak_login(request):
