@@ -5,7 +5,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-if settings.DEBUG and settings.KEYCLOAK_CONFIG.get("USE_DUMMY", True):
+if settings.DEBUG and settings.KEYCLOAK_CONFIG["USE_DUMMY"]:
     from .dummy_keycloak_service import DummyKeycloakService as KeycloakService
 else:
     from keycloak import KeycloakOpenID, KeycloakAdmin
