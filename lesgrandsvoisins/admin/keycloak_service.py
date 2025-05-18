@@ -12,7 +12,6 @@ else:
     class KeycloakService:
         def __init__(self):
             config = settings.KEYCLOAK_CONFIG
-            logger.debug(f"[Keycloak] Connecting to realm: {self.realm}")
             self.keycloak_openid = KeycloakOpenID(
                 server_url=config["SERVER_URL"],
                 client_id=config["CLIENT_ID"],
@@ -20,6 +19,7 @@ else:
                 client_secret_key=config["CLIENT_SECRET_KEY"],
                 verify=True  # Set False if self-signed
             )
+            logger.debug(f"[Keycloak] Connecting to realm: {self.keycloak_openid.realm}")
 
         def login(self, username, password):
             logger.debug(f"[Keycloak] Attempting login for user: {username}")
