@@ -13,7 +13,7 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    path("register/", ldap_register_view, name="ldap_register"),
+    path("register/", keycloak_register_view, name="keycloak_register"),
     path("ajax/check-username/", check_username, name="check_username")
 ]
 
