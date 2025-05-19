@@ -145,7 +145,7 @@ def ldap_register_view(request):
             data = form.cleaned_data
             try:
                 ldapservice = LDAPService()
-                ldapservice.create_user(data["username"], data["password"], data.get("email"), data.get("firstname"), data.get("lastname"))
+                ldapservice.create_user(data["username"], data["password"], data["email"], data["firstname"], data["lastname"])
                 messages.success(request, "Registration successful. You may now log in.")
                 return redirect("ldap_login")
             except Exception as e:
