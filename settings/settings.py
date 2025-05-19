@@ -79,13 +79,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'wagtail_modeladmin',          # if Wagtail >=5.1; Don't repeat if it's there already
-    'wagtailmenus',
+    # 'wagtailmenus',
     'keycloak',
     'lesgrandsvoisins.annuaire',
     'lesgrandsvoisins.admin',
     'lesgrandsvoisins.home',
     'lesgrandsvoisins.tailwind',
-    'meta', # django-meta for SEO
+    # 'meta', # django-meta for SEO
 ]
 
 KEYCLOAK_CONFIG = {
@@ -100,11 +100,11 @@ KEYCLOAK_CONFIG = {
 
 LDAP_CONFIG = {
     "URL": os.getenv("LDAP_URL"),
-    "BASE_DN": os.getenv("BASE_DN"),
-    "BIND_DN": os.getenv("BIND_DN"),
-    "BIND_PASSWORD": os.getenv("BIND_PASSWORD"),
-    "USERS_OU": os.getenv("USERS_OU"),  # corresponds to ou=users,dc=example,dc=org
-    "GROUPS_OU": os.getenv("GROUPS_OU"),  # corresponds to ou=users,dc=example,dc=org
+    "BASE_DN": os.getenv("LDAP_BASE_DN"),
+    "BIND_DN": os.getenv("LDAP_BIND_DN"),
+    "BIND_PASSWORD": os.getenv("LDAP_BIND_PASSWORD"),
+    "USERS_OU": os.getenv("LDAP_USERS_OU"),  # corresponds to ou=users,dc=example,dc=org
+    "GROUPS_OU": os.getenv("LDAP_GROUPS_OU"),  # corresponds to ou=users,dc=example,dc=org
 }
 
 
@@ -137,13 +137,13 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'wagtail.contrib.settings.context_processors.settings',
-                'wagtailmenus.context_processors.wagtailmenus',
+                # 'wagtailmenus.context_processors.wagtailmenus',
             ],
         },
     },
 ]
 
-SILENCED_SYSTEM_CHECKS = ["wagtailadmin.W002"] # https://github.com/jazzband/wagtailmenus/issues/464
+# SILENCED_SYSTEM_CHECKS = ["wagtailadmin.W002"] # https://github.com/jazzband/wagtailmenus/issues/464
 
 
 

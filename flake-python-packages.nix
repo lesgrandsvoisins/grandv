@@ -4,6 +4,20 @@
 { pkgs, fetchurl, fetchgit, fetchhg }:
 
 self: super: {
+  # "django-cogwheels" = super.buildPythonPackage rec {
+  #   pname = "django-cogwheels";
+  #   version = "0.3";
+  #   src = fetchurl {
+  #     url = "https://files.pythonhosted.org/packages/9a/3b/2db92c666d39da78cc872da012582dab7bf4f3ff25e8246bd6ebc547e301/django_cogwheels-0.3-py3-none-any.whl";
+  #     sha256 = "08gdnmkv2f4l14gq277jkh1vckqw6y53yjr105rksh0lf5gd0yqr";
+  #   };
+  #   format = "wheel";
+  #   doCheck = false;
+  #   buildInputs = [];
+  #   checkInputs = [];
+  #   nativeBuildInputs = [];
+  #   propagatedBuildInputs = [];
+  # };
   "django-meta" = super.buildPythonPackage rec {
     pname = "django-meta";
     version = "2.5.0";
@@ -34,21 +48,21 @@ self: super: {
       # self."Wagtail"
     ];
   };
-  "wagtailmenus" = super.buildPythonPackage rec {
-    pname = "wagtailmenus";
-    version = "4.0.2";
-    src = fetchurl {
-      url = "https://files.pythonhosted.org/packages/b0/45/a1624a5a2e68ee29a05d847c5fff8814952caa08a3335a3c996f243fb809/wagtailmenus-4.0.2-py3-none-any.whl";
-      sha256 = "137yi9hwl01781aa2986xd3nq01b3rfyicxl0bcrl45z1cw0s84g";
-    };
-    format = "wheel";
-    doCheck = false;
-    buildInputs = [];
-    checkInputs = [];
-    nativeBuildInputs = [];
-    propagatedBuildInputs = [
-      # self."Wagtail"
-      # self."django-cogwheels"
-    ];
-  };
+  # "wagtailmenus" = super.buildPythonPackage rec {
+  #   pname = "wagtailmenus";
+  #   version = "4.0.2";
+  #   src = fetchurl {
+  #     url = "https://files.pythonhosted.org/packages/b0/45/a1624a5a2e68ee29a05d847c5fff8814952caa08a3335a3c996f243fb809/wagtailmenus-4.0.2-py3-none-any.whl";
+  #     sha256 = "137yi9hwl01781aa2986xd3nq01b3rfyicxl0bcrl45z1cw0s84g";
+  #   };
+  #   format = "wheel";
+  #   doCheck = false;
+  #   buildInputs = [];
+  #   checkInputs = [];
+  #   nativeBuildInputs = [];
+  #   propagatedBuildInputs = [
+  #     # self."Wagtail"
+  #     # self."django-cogwheels"
+  #   ];
+  # };
 }

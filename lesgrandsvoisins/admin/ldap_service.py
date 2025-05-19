@@ -14,7 +14,8 @@ class LDAPService:
         self.base_dn = settings.LDAP_CONFIG["BASE_DN"]
         self.bind_dn = settings.LDAP_CONFIG["BIND_DN"]
         self.bind_password = settings.LDAP_CONFIG["BIND_PASSWORD"]
-        self.users_ou = settings.LDAP_CONFIG.get("USERS_OU", "users")  # organizational unit
+        self.users_ou = settings.LDAP_CONFIG["USERS_OU"]
+        self.groups_ou = settings.LDAP_CONFIG["GROUPS_OU"]
 
     def _connect(self):
         logger.debug(f"[LDAP] Connecting to {self.ldap_url}")
@@ -23,7 +24,8 @@ class LDAPService:
         return conn
 
     def authenticate(self, username, password):
-        user_dn = f"uid={username},ou={self.users_ou},{self.base_dn}"
+        user_dn = "cn=%s,%s" % (username,self.users_ou)
+        logger.debug(f"[LDAP] Authentication initiated for for {user_dn}")
         try:
             conn = self._connect()
             conn.simple_bind_s(user_dn, password)
@@ -34,10 +36,7 @@ class LDAPService:
             return {"username":username}
         except ldap.INVALID_CREDENTIALS:
             logger.warning(f"[LDAP] Invalid credentials for {username}")
-            return False
-        except Exception as e:
-            logger.error(f"[LDAP] Authentication error: {e}")
-            raise
+            raise Exception(f"[LDAP] Invalid credentials for {username}")
 
     def search_user(self, username):
         conn = self._connect()

@@ -57,10 +57,10 @@
       
       {% if 'username' in request.session %}
         <a href="{% url 'lesgrandsvoisins_dashboard' %}">{{ request.session.username }}</a>
-        <a href="{% url 'keycloak_logout' %}">Logout</a>
+        <a href="{% url 'ldap_logout' %}">Logout</a>
       {% else %}
-        <a href="{% url 'keycloak_login' %}">Login</a>
-        <a href="{% url 'keycloak_register' %}">Register</a>
+        <a href="{% url 'ldap_login' %}">Login</a>
+        <a href="{% url 'ldap_register' %}">Register</a>
       {% endif %}
       </nav>
       <hr />
