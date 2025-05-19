@@ -1,18 +1,24 @@
 {
   description = "A flake for the correct python envrionment for this website";
-
+  
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {self, nixpkgs, ...}: 
-  let
-    pkgs = nixpkgs.legacyPackages."x86_64-linux";
-    pkgName = "wagtailenv";
-    packageOverrides = pkgs.callPackage ./flake-python-packages.nix {};
-    python = pkgs.python312.override {inherit packageOverrides; };
-    packages = with pkgs; [
-        (python.withPackages (python-pkgs: with python-pkgs; [
+  outputs = {self, nixpkgs, flake-utils, ...}:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config = { allowUnfree = true; };
+        };
+        pkgName = "wagtailenv";
+        packageOverrides = pkgs.callPackage ./flake-python-packages.nix {};
+        python = pkgs.python311.override {inherit packageOverrides; };
+        # packages = with pkgs; [
+        #    (python.withPackages (python-pkgs: with python-pkgs; [
+        pythonEnv = python.withPackages (ps: with ps; [
           # select Python packages here
           pillow
           gunicorn
@@ -44,23 +50,28 @@
           django-debug-toolbar
           ## Feature for future Testing
           ## django-meta
-        ]))
-      ];
-  in {
-    devShells.x86_64-linux.default = pkgs.mkShell {
-      packages = packages;
-    };
-    packages.x86_64-linux.default = derivation {
-      name = pkgName;
-      builder = with pkgs; "${python}/bin/python";
-      args = [ "-m gunicorn" "--env WAGTAIL_ENV='production'" "--access-logfile /tmp/access.log" "--error-logfile /tmp/error.log" "--chdir ${self}" "--workers 12" "--bind 0.0.0.0:8999" "settings.wsgi:application"];
-      outputs = ["bin"];
-      system = "x86_64-linux";
-      src = ./.;
-      buildInputs = [ packages ];
-    };
-    # packages.x86_64-linux.lib = pkgs.mkDerivation {
-    #   packages = packages;
-    # };
-  };
-}
+        ]);
+        src = ./.;
+      in {
+      packages.default = pkgs.writeShellApplication {
+        name = "run-django";
+        runtimeInputs = [ pythonEnv pkgs.git ];
+        text = ''
+          export PYTHONPATH=$PWD
+          export DJANGO_SETTINGS_MODULE=settings
+          echo "Starting --env WAGTAIL_ENV='production' --access-logfile /tmp/access.log --error-logfile /tmp/error.log --chdir ${self} --workers 12 --bind 0.0.0.0:8999 settings.wsgi:application --reload"
+        '';
+      };
+      devShells.default = pkgs.mkShell {
+        buildInputs = [ pythonEnv pkgs.git ];
+        shellHook = ''
+          export PYTHONPATH=$PWD
+          export DJANGO_SETTINGS_MODULE=settings
+          echo "Dev shell ready. You can run the server with: gunicorn myproject.wsgi:application --bind 127.0.0.1:8000 --reload"
+        '';
+      };
+      # devShells.x86_64-linux.default = pkgs.mkShell {
+      #   packages = packages;
+      # };
+    }); 
+  }
