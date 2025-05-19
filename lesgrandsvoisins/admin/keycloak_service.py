@@ -61,7 +61,7 @@ else:
                 "username": username,
                 "email": email,
                 "firstName": firstname,
-                "lastname": lastName,
+                "lastName": lastname,
                 "enabled": True,
                 "credentials": [{
                     "type": "password",
