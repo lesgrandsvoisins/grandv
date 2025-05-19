@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Prendre les variables d'environnement
 load_dotenv()
 
-REQUIRED = []
+REQUIRED = ["SECRET_KEY"]
 
 needs_required = []
 for i in REQUIRED:
@@ -46,7 +46,6 @@ for host in ALLOWED_HOSTS:
     CSRF_TRUSTED_ORIGINS.append("https://" + host)
 
 HOST_URL = os.getenv("HOST_URL", "localhost")
-WAGTAIL_SITE_NAME = os.getenv("SITE_NAME", "grandsvoisins.com")
 WAGTAILADMIN_BASE_URL = HOST_URL
 
 # SITE_ID requis pour ALLAUTH
@@ -248,7 +247,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "annuaire.lesgrandsvoisins.com"
+WAGTAIL_SITE_NAME = os.getenv("WAGTAIL_SITE_NAME","GrandV.org")
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
