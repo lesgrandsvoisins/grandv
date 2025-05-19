@@ -91,7 +91,7 @@
         # runtimeInputs = [ pythonEnv pkgs.git ];
         text = ''
           export PYTHONPATH=$PWD
-          export DJANGO_SETTINGS_MODULE=settings
+          export DJANGO_SETTINGS_MODULE=settings.settings
           echo "Starting --env WAGTAIL_ENV='production' --access-logfile /tmp/access.log --error-logfile /tmp/error.log --chdir ${self} --workers 12 --bind 0.0.0.0:8909 settings.wsgi:application --reload"
         '';
       };
@@ -100,7 +100,7 @@
         buildInputs = [ pythonPackages pkgs.git ];
         shellHook = ''
           export PYTHONPATH=$PWD
-          export DJANGO_SETTINGS_MODULE=settings
+          export DJANGO_SETTINGS_MODULE=settings.settings
           echo "Dev shell ready. You can run the server with: gunicorn myproject.wsgi:application --bind 127.0.0.1:8909 --reload"
         '';
       };
