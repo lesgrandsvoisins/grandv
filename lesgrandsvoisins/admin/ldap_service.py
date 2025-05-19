@@ -59,8 +59,8 @@ class LDAPService:
             "objectClass": [b"inetOrgPerson", b"organizationalPerson", b"top"],
             "cn": [username.encode()],
             "givenName": [firstname],
-            "sn": [lastname],
-            "uid": [email],
+            "sn": [lastname.encode()],
+            "uid": [email.encode()],
             "userPassword": [password.encode()]
         }
 
