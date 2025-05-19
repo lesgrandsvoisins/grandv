@@ -63,11 +63,11 @@ else:
                 "firstName": firstname,
                 "lastName": lastname,
                 "enabled": True,
-                "credentials": [{
-                    "type": "password",
-                    "value": password,
-                    "temporary": False
-                }]
+                # "credentials": [{
+                #     "type": "password",
+                #     "value": password,
+                #     "temporary": False
+                # }]
             }
 
             try:
