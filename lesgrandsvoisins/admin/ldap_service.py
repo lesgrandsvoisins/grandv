@@ -58,7 +58,7 @@ class LDAPService:
         attrs = {
             "objectClass": [b"inetOrgPerson", b"organizationalPerson", b"top"],
             "cn": [username.encode()],
-            "givenName": [firstname],
+            "givenName": [firstname.encode()],
             "sn": [lastname.encode()],
             "uid": [email.encode()],
             "userPassword": [password.encode()]
