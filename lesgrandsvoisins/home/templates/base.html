@@ -68,6 +68,7 @@
       {% endblock content %}
       <hr />
       <footer class="md:flex">
+        {% block footer %}
         <div class="w-1/1 md:w-1/2">
           <h2>Les Grands Voisins</h2>
           <p>
@@ -93,6 +94,7 @@
               <a href="https://www.lesgv.com/fr/">Apps</a>
             </div>
           </div>
+          {% endblock footer %}
         </div>
       </footer>
       <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>

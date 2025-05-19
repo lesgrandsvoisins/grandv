@@ -8,6 +8,7 @@ wagtail-modeladmin
 # wagtailmenus
 # Public facing server, I think
 python-keycloak
+python-ldap
 # Dev
 djlint
 django-debug-toolbar

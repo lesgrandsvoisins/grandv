@@ -5,71 +5,14 @@
     <head>
         <title>Application Dashboard</title>
         {% block end_head %}
-        <style>
-        .dashboard { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 1rem; 
-            padding: 1rem; 
-        }
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 1rem;
-            width: 250px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .card.inactive {
-            opacity: 0.5;
-            {% comment %} background: #f0f0f0; {% endcomment %}
-        }
-        .icon {
-            font-size: 2rem;
-        }
-        .title {
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        .source {
-            font-size: 0.9rem;
-            {% comment %} color: #666; {% endcomment %}
-        }
-        .description {
-            font-size: 0.9rem;
-            {% comment %} color: #444; {% endcomment %}
-        }
-        </style>
-        <!-- You can include Font Awesome or similar here for icons -->
-         {% comment %}
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-         {% endcomment %}
-          <script src="https://unpkg.com/feather-icons"></script>
+        
 
         {% endblock end_head %}
     </head>
     <body>
       {% block content %}
         <h1 style="padding-left:1rem;">Application Dashboard</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-            {% for app in apps %}
-            <a href="{{ app.url }}" class="hover:border-dashed hover:border-8 hover: border-orange-600 rounded-2xl hover:scale-110 h-full">
-                <div class="h-full bg-gray-800 dark:bg-gray-50 rounded-2xl border-current border-dashed border-orange-600 text-gray-50 dark:text-gray-800 hover:border-color-blue-500 p-4   {% if not app.is_active %}inactive{% endif %}">
-                    <i data-feather="{{ app.icon }}" class="h-16 w-16 float-left m-2"></i>
-                    <div class="text-2xl">{{ app.title }}</div>
-                    <div class="">{{ app.domain }}</div>
-                    <div class="">{{ app.description }}</div>
-                </div>
-            </a>
-            {% endfor %}
-        </div>
-        <script>
-            feather.replace();
-        </script>
+        {% include "lesgrandsvoisins/admin/includes/applications.html" %}
       {% endblock content %}
     </body>
 </html>
