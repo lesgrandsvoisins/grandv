@@ -53,13 +53,14 @@ class LDAPService:
         conn = self._connect()
         conn.simple_bind_s(self.bind_dn, self.bind_password)
 
-        dn = f"uid={username},ou={self.users_ou},{self.base_dn}"
+        dn = "cn=%s,%s" % (username,self.users_ou)
+        # f"cn={username},ou={self.users_ou},{self.base_dn}"
         attrs = {
             "objectClass": [b"inetOrgPerson", b"organizationalPerson", b"top"],
             "cn": [username.encode()],
             "givenName": [firstname],
             "sn": [lastname],
-            "uid": [uid],
+            "uid": [email],
             "userPassword": [password.encode()]
         }
 
