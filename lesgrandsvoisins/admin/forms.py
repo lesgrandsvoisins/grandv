@@ -31,11 +31,11 @@ class KeycloakRegistrationForm(forms.Form):
         if password and password_confirm and password != password_confirm:
             raise ValidationError("Passwords do not match.")
 
-        # Check Keycloak for existing username
-        if username:
-            keycloak = KeycloakService()
-            existing_users = keycloak.admin.get_users(query={"username": username})
-            if existing_users:
-                raise ValidationError(f"Username '{username}' is already taken.")
+        # # Check Keycloak for existing username
+        # if username:
+        #     keycloak = KeycloakService()
+        #     existing_users = keycloak.admin.get_users(query={"username": username})
+        #     if existing_users:
+        #         raise ValidationError(f"Username '{username}' is already taken.")
 
         return cleaned_data
