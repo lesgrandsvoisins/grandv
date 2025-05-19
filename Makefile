@@ -16,5 +16,5 @@ update:
 	nix develop --command python manage.py collectstatic -c --noinput
 
 runserver:
-	nix develop --command python manage.py runserver
+	nix develop --command python manage.py runserver 0.0.0.0:8080
 
