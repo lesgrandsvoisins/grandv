@@ -3,55 +3,23 @@
   
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    mach-nix.url = "github:DavHau/mach-nix";
+    # mach-nix.url = "github:DavHau/mach-nix";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {self, nixpkgs, mach-nix, flake-utils}:
+  outputs = {self, nixpkgs, flake-utils}:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
-          # config = { allowUnfree = true; };
+          config = { allowUnfree = true; };
         };
-        # pkgName = "wagtailenv";
-        # packageOverrides = pkgs.callPackage ./flake-python-packages.nix {};
-        # python = pkgs.python311.override {inherit packageOverrides; };
+        pkgName = "wagtailenv";
+        packageOverrides = pkgs.callPackage ./flake-python-packages.nix {};
+        python = pkgs.python311.override {inherit packageOverrides; };
         # pythonPackages = python.withPackages (ps: with ps; [
-        pythonPackages = mach-nix.lib.${system}.mkPython {
-          requirements = ''
-          pillow
-          gunicorn
-          pip
-          libsass
-          python-ldap
-          pyscss
-          django-libsass
-          pylibjpeg-libjpeg
-          pypdf2
-          pq
-          aiosasl
-          psycopg2
-          django
-          wagtail
-          python-dotenv
-          dj-database-url 
-          # psycopg2-binary
-          django-taggit
-          # wagtail-modeladmin
-          # wagtailmenus
-          # django-meta
-          ## Public facing server, I think
-          python-keycloak
-          ## Dev
-          ## djlint
-          django-debug-toolbar
-          ## Feature for future Testing
-          ## django-meta
-          '';
-        };
-        # pythonPackages = python.withPackages (ps: with ps; [
-        #   # select Python packages here
+        # pythonPackages = mach-nix.lib.${system}.mkPython {
+        #   requirements = ''
         #   pillow
         #   gunicorn
         #   pip
@@ -61,9 +29,7 @@
         #   django-libsass
         #   pylibjpeg-libjpeg
         #   pypdf2
-        #   #venvShellHook
         #   pq
-        #   # python3
         #   aiosasl
         #   psycopg2
         #   django
@@ -82,7 +48,41 @@
         #   django-debug-toolbar
         #   ## Feature for future Testing
         #   ## django-meta
-        # ]);
+        #   '';
+        # };
+        pythonPackages = python.withPackages (ps: with ps; [
+          # select Python packages here
+          pillow
+          gunicorn
+          pip
+          libsass
+          python-ldap
+          pyscss
+          django-libsass
+          pylibjpeg-libjpeg
+          pypdf2
+          #venvShellHook
+          pq
+          # python3
+          aiosasl
+          psycopg2
+          django
+          wagtail
+          python-dotenv
+          dj-database-url 
+          # psycopg2-binary
+          django-taggit
+          # wagtail-modeladmin
+          # wagtailmenus
+          # django-meta
+          ## Public facing server, I think
+          python-keycloak
+          ## Dev
+          ## djlint
+          django-debug-toolbar
+          ## Feature for future Testing
+          ## django-meta
+        ]);
         src = ./.;
       in {
       packages.default = pkgs.writeShellApplication {
