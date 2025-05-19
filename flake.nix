@@ -72,7 +72,7 @@
           dj-database-url 
           # psycopg2-binary
           django-taggit
-          # wagtail-modeladmin
+          wagtail-modeladmin
           # wagtailmenus
           # django-meta
           ## Public facing server, I think
