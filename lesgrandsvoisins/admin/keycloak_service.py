@@ -62,6 +62,8 @@ else:
                 "email": email,
                 "firstName": firstname,
                 "lastName": lastname,
+                "telephoneNumber": "",
+                "lgvmail": [],
                 "enabled": True,
                 # "credentials": [{
                 #     "type": "password",
