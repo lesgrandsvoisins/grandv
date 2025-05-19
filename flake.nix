@@ -9,7 +9,7 @@
   let
     pkgs = nixpkgs.legacyPackages."x86_64-linux";
     pkgName = "wagtailenv";
-    packageOverrides = pkgs.callPackage ./lesgrandsvoisins-python-packages.nix {};
+    packageOverrides = pkgs.callPackage ./flake-python-packages.nix {};
     python = pkgs.python312.override {inherit packageOverrides; };
     packages = with pkgs; [
         (python.withPackages (python-pkgs: with python-pkgs; [
