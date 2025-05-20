@@ -15,6 +15,16 @@ import os
 import dj_database_url  # Pour un syntaxe différent de base de données
 from dotenv import load_dotenv  # Pour les variables d'.env
 
+
+# from allauth.account.signals import user_signed_up
+# from django.contrib.auth.models import Group
+
+# @receiver(user_signed_up)
+# def user_signed_up_callback(sender, request, user, **kargs):
+#     dashboard_user_group = Group.objects.get(name="dashboard")
+#     user.groups.add(dashboard_user_group)
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

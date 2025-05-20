@@ -14,6 +14,6 @@ class LesgrandsvoisinsAdminConfig(AppConfig):
     name = 'lesgrandsvoisins.admin'
     label = 'lesgrandsvoisins_admin'
 
-    def ready(self):
-        from allauth.account.signals import user_signed_up
-        user_signed_up.connect(user_signed_up_callback)
+    # def ready(self):
+    #     from allauth.account.signals import user_signed_up
+    #     user_signed_up.connect(user_signed_up_callback)
