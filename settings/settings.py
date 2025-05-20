@@ -94,7 +94,8 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # LOGIN_URL = '/login/'
 # LOGIN_REDIRECT_URL = '/'
-ACCOUNT_AUTHENTICATION_METHOD = "username"
+# ACCOUNT_AUTHENTICATION_METHOD = "username"
+ACCOUNT_LOGIN_METHODS = {'username'}
 SOCIALACCOUNT_AUTO_SIGNUP = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 SOCIALACCOUNT_ONLY = True
@@ -173,12 +174,12 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    "allauth.account.middleware.AccountMiddleware",
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     'django.middleware.locale.LocaleMiddleware', # For automatic language prefix
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -356,3 +357,14 @@ LOGGING = {
     },
 }
 
+
+# Base URL to use when referring to full URLs within the Wagtail admin backend -
+# e.g. in notification emails. Don't include '/admin' or a trailing slash
+# Base URL to use when referring to full URLs within the Wagtail admin backend -
+# e.g. in notification emails. Don't include '/admin' or a trailing slash
+WAGTAILADMIN_BASE_URL = f"{os.getenv('HOST_PROTO', 'https')}://{HOST_URL}"
+
+
+HOST_PORT = os.getenv("HOST_PORT", "")
+if HOST_PORT != "":
+    WAGTAILADMIN_BASE_URL = f"{WAGTAILADMIN_BASE_URL}:{HOST_PORT}"
