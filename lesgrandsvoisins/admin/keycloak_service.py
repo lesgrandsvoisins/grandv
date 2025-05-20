@@ -25,6 +25,8 @@ else:
                 verify=True
             )
 
+            logger.debug(self.admin)
+
             self.keycloak_openid = KeycloakOpenID(
                 server_url=config["SERVER_URL"],
                 client_id=config["CLIENT_ID"],
