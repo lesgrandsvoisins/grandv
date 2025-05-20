@@ -69,7 +69,7 @@ SOCIALACCOUNT_PROVIDERS = {
                 "client_id": os.getenv("KEYCLOAK_CONFIG_CLIENT_ID"),
                 "secret": os.getenv("KEYCLOAK_CONFIG_CLIENT_SECRET_KEY"),
                 "settings": {
-                    "server_url": os.getenv("KEYCLOAK_CONFIG_SERVER_URL"),
+                    "server_url": "%s/realms/%s" % (os.getenv("KEYCLOAK_CONFIG_SERVER_URL"),os.getenv("KEYCLOAK_CONFIG_REALM")),
                     # Optional token endpoint authentication method.
                     # May be one of "client_secret_basic", "client_secret_post"
                     # If omitted, a method from the the server's
