@@ -18,4 +18,4 @@ def user_signed_up_callback(sender, request, user, **kargs):
     if dashboard_user_group:
       user.groups.add(dashboard_user_group)
 
-# https://www.grandv.org/accounts/oidc/key-lesgrandsvoisins-com/login/?process=admin/login/
+# https://www.grandv.org/accounts/oidc/key-lesgrandsvoisins-com/login/?process=wagtailadmin/login/
