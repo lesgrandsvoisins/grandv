@@ -194,8 +194,8 @@ TEMPLATES = [
             'context_processors': [
                 "django.template.context_processors.debug",
                 'django.template.context_processors.request',
-                "allauth.account.context_processors.account", # 
-                "allauth.socialaccount.context_processors.socialaccount", #
+                # "allauth.account.context_processors.account", # 
+                # "allauth.socialaccount.context_processors.socialaccount", #
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
