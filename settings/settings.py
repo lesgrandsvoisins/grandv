@@ -51,9 +51,60 @@ WAGTAILADMIN_BASE_URL = HOST_URL
 # SITE_ID requis pour ALLAUTH
 SITE_ID = os.getenv("SITE_ID", 1)
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SOCIALACCOUNT_PROVIDERS = {
+    "openid_connect": {
+        "OAUTH_PKCE_ENABLED": True,
+        # 'SOCIALACCOUNT_ONLY': True,
+        "APPS": [
+            {
+                "provider_id": "key-lesgrandsvoisins-com",
+                "name": "key.lesgrandsvoisins.com",
+                "client_id": os.getenv("KEYCLOAK_CONFIG_CLIENT_ID"),
+                "secret": os.getenv("KEYCLOAK_CONFIG_CLIENT_SECRET_KEY"),
+                "settings": {
+                    "server_url": os.getenv("KEYCLOAK_CONFIG_SERVER_URL"),
+                    # Optional token endpoint authentication method.
+                    # May be one of "client_secret_basic", "client_secret_post"
+                    # If omitted, a method from the the server's
+                    # token auth methods list is used
+                    "token_auth_method": "client_secret_post",
+                },
+            },
+        ],
+    }
+}
+
+
+# LOGIN_URL = '/login/'
+# LOGIN_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+SOCIALACCOUNT_AUTO_SIGNUP = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
+SOCIALACCOUNT_ONLY = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
+# # ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+# ACCOUNT_LOGOUT_ON_GET = True
+# # ACCOUNT_LOGOUT_REDIRECT_URL = '/login/'
+# ACCOUNT_PRESERVE_USERNAME_CASING = False
+# ACCOUNT_SESSION_REMEMBER = True
+# # ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+# ACCOUNT_USERNAME_BLACKLIST = ["admin", "god"]
+# # ACCOUNT_USERNAME_MIN_LENGTH = 2
+
 # Application definition
 
 INSTALLED_APPS = [
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.openid_connect",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
@@ -117,6 +168,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     'django.middleware.locale.LocaleMiddleware', # For automatic language prefix
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'settings.urls'

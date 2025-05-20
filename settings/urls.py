@@ -30,6 +30,7 @@ urlpatterns = [
     path('djangoadmin/', django_admin.site.urls),
     # path("annuaire/", include(annuaire_urls)),
     path("admin/", include(lgvadmin_urls)),
+    path("accounts/", include("allauth.urls")),
     path("", include(lesgrandsvoisins_home_urls)),
     path("", include(wagtail_urls)),
 ]

@@ -20,3 +20,7 @@ update:
 runserver:
 	./.venv/bin/python manage.py runserver 0.0.0.0:8080
 
+requirements:
+	./.venv/bin/pip install --upgrade pip
+	./.venv/bin/pip install -r requirements.txt
+
