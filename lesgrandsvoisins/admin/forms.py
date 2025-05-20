@@ -3,17 +3,17 @@ from django.core.exceptions import ValidationError
 from .keycloak_service import KeycloakService
 
 class KeycloakLoginForm(forms.Form):
-    username = forms.CharField(label="Username", max_length=150)
-    password = forms.CharField(label="Password", widget=forms.PasswordInput)
+    username = forms.CharField(label="Identifiant d'utilisateur", max_length=150)
+    password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
 
 # forms.py
 class KeycloakRegistrationForm(forms.Form):
     email = forms.EmailField()
-    firstname = forms.CharField(max_length=150)
-    lastname = forms.CharField(max_length=150)
-    username = forms.CharField(max_length=150)
-    password = forms.CharField(widget=forms.PasswordInput)
-    password_confirm = forms.CharField(widget=forms.PasswordInput)
+    firstname = forms.CharField(label="Prénom", max_length=150)
+    lastname = forms.CharField(label="Nom de famille",max_length=150)
+    username = forms.CharField(label="Identifiant d'utilisateur",max_length=150)
+    password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
+    password_confirm = forms.CharField(label="Mot de passe (confirmation)", widget=forms.PasswordInput)
 
     def clean(self):
         cleaned_data = super().clean()
