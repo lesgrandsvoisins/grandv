@@ -173,12 +173,12 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     'django.middleware.locale.LocaleMiddleware', # For automatic language prefix
-    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -194,6 +194,8 @@ TEMPLATES = [
             'context_processors': [
                 "django.template.context_processors.debug",
                 'django.template.context_processors.request',
+                "allauth.account.context_processors.account", # 
+                "allauth.socialaccount.context_processors.socialaccount", #
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
