@@ -64,14 +64,15 @@ else:
                 "email": email,
                 "firstName": firstname,
                 "lastName": lastname,
-                "telephoneNumber": "",
-                "lgvmail": [],
+                "emailVerified": True,
+                # "telephoneNumber": "",
+                # "lgvmail": [],
                 "enabled": True,
-                # "credentials": [{
-                #     "type": "password",
-                #     "value": password,
-                #     "temporary": False
-                # }]
+                "credentials": [{
+                    "type": "password",
+                    "value": password,
+                    "temporary": False
+                }]
             }
 
             try:
