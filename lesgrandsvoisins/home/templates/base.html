@@ -59,7 +59,7 @@
         <a href="{% url 'lesgrandsvoisins_dashboard' %}">{{ request.session.username }}</a>
         <a href="{% url 'ldap_logout' %}">Déconnexion</a>
       {% else %}
-        {% comment %} <a href="{% url 'ldap_login' %}">Connexion</a> {% endcomment %}
+        {% comment %} <a href="{% url 'keycloak_login' %}">Connexion</a> {% endcomment %}
          <div>Connexion (à venir)</div>
         <a href="{% url 'keycloak_register' %}">S'enregistrer</a>
       {% endif %}

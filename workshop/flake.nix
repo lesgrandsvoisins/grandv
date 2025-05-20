@@ -51,37 +51,29 @@
         #   '';
         # };
         pythonPackages = python.withPackages (ps: with ps; [
-          # select Python packages here
-          pillow
-          gunicorn
-          pip
-          libsass
-          python-ldap
-          pyscss
+          aiosasl
+          dj-database-url 
+          django
+          django-allauth
+          django-debug-toolbar
           django-libsass
+          django-meta
+          django-taggit
+          python-dotenv
+          gunicorn
+          libsass
+          pillow
+          pip
+          pq
+          psycopg2-binary
           pylibjpeg-libjpeg
           pypdf2
-          #venvShellHook
-          pq
-          # python3
-          aiosasl
-          psycopg2
-          django
-          wagtail
+          pyscss
           python-dotenv
-          dj-database-url 
-          # psycopg2-binary
-          django-taggit
-          wagtail-modeladmin
-          # wagtailmenus
-          # django-meta
-          ## Public facing server, I think
           python-keycloak
-          ## Dev
-          ## djlint
-          django-debug-toolbar
-          ## Feature for future Testing
-          ## django-meta
+          python-ldap
+          wagtail
+          wagtail-modeladmin
         ]);
         src = ./.;
       in {

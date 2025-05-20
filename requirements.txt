@@ -1,18 +1,23 @@
+aiosasl
+dj-database-url 
 django
-wagtail
-dotenv
-dj-database-url
-psycopg2-binary
+django-allauth
+django-debug-toolbar
+django-libsass
+django-meta
 django-taggit
-wagtail-modeladmin
-# wagtailmenus
-# Public facing server, I think
+dotenv
+gunicorn
+libsass
+pillow
+pip
+pq
+psycopg2-binary
+pylibjpeg-libjpeg
+pypdf2
+pyscss
+python-dotenv
 python-keycloak
 python-ldap
-# Dev
-djlint
-django-debug-toolbar
-# Feature for future Testing
-django-meta
-# Production
-gunicorn
+wagtail
+wagtail-modeladmin

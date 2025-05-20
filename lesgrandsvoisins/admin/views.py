@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .keycloak_service import KeycloakService
-from .ldap_service import LDAPService
+# from .ldap_service import LDAPService
 
 from django.shortcuts import render, redirect
 from .forms import KeycloakLoginForm, KeycloakRegistrationForm
@@ -14,41 +14,40 @@ from django.contrib import messages
 
 from .models import Application
 
+# @csrf_exempt
+# def ldap_login(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         username = data.get('username')
+#         password = data.get('password')
 
-@csrf_exempt
-def ldap_login(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        username = data.get('username')
-        password = data.get('password')
+#         ldap = LDAPService()
+#         try:
+#             return ldap.login(username, password)
+#         except Exception as e:
+#             return JsonResponse({'error': str(e)}, status=401)
 
-        ldap = LDAPService()
-        try:
-            return ldap.login(username, password)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=401)
+# def ldap_login_view(request):
+#     if request.method == 'POST':
+#         form = KeycloakLoginForm(request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data['username']
+#             password = form.cleaned_data['password']
+#             ldapservice = LDAPService()
 
-def ldap_login_view(request):
-    if request.method == 'POST':
-        form = KeycloakLoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            ldapservice = LDAPService()
-
-            try:
-                userinfo = ldapservice.authenticate(username, password)
-                if userinfo:
-                    request.session['username'] = userinfo['username']
-                    return redirect('lesgrandsvoisins_dashboard')  
-                else:
-                    messages.error(request, f'Login failed: {str(e)}')
-            except Exception as e:
-                messages.error(request, f'Login failed: {str(e)}')
-    else:
-        form = KeycloakLoginForm()
+#             try:
+#                 userinfo = ldapservice.authenticate(username, password)
+#                 if userinfo:
+#                     request.session['username'] = userinfo['username']
+#                     return redirect('lesgrandsvoisins_dashboard')  
+#                 else:
+#                     messages.error(request, f'Login failed: {str(e)}')
+#             except Exception as e:
+#                 messages.error(request, f'Login failed: {str(e)}')
+#     else:
+#         form = KeycloakLoginForm()
     
-    return render(request, 'lesgrandsvoisins/admin/login.html', {'form': form, 'title': 'Login'})
+#     return render(request, 'lesgrandsvoisins/admin/login.html', {'form': form, 'title': 'Login'})
 
 @csrf_exempt
 def keycloak_login(request):
@@ -90,10 +89,10 @@ def keycloak_login_view(request):
     
     return render(request, 'lesgrandsvoisins/admin/login.html', {'form': form, 'title': 'Login'})
 
-def ldap_logout_view(request):
-    request.session.flush()
-    messages.success(request, "You have been logged out.")
-    return redirect('ldap_login')  # or wherever your login page is
+# def ldap_logout_view(request):
+#     request.session.flush()
+#     messages.success(request, "You have been logged out.")
+#     return redirect('ldap_login')  # or wherever your login page is
 
 def keycloak_logout_view(request):
     refresh_token = request.session.get('refresh_token')
@@ -107,7 +106,7 @@ def keycloak_logout_view(request):
     # Clear the session
     request.session.flush()
     messages.success(request, "You have been logged out.")
-    return redirect('ldap_login')  # or wherever your login page is
+    return redirect('keycloak_login')  # or wherever your login page is
 
 def dashboard_view(request):
     apps = Application.objects.all().order_by("title")
@@ -117,7 +116,7 @@ def index_view(request):
     if check_logged_in(request):
         return redirect('lesgrandsvoisins_dashboard')
     else:
-        return redirect('ldap_login')
+        return redirect('keycloak_login')
 
 def check_logged_in(request):
     return "username" in request.session
@@ -131,28 +130,28 @@ def keycloak_register_view(request):
                 keycloak = KeycloakService()
                 keycloak.create_user(data["username"], data["password"], data.get("email"), data.get("firstname"), data.get("lastname"))
                 messages.success(request, "Registration successful. You may now log in.")
-                return redirect("ldap_login")
+                return redirect("keycloak_login")
             except Exception as e:
                 messages.error(request, f"Registration failed: {e}")
     else:
         form = KeycloakRegistrationForm()
     return render(request, "lesgrandsvoisins/admin/register.html", {"form": form, 'title': 'S\'enregistrer'})
 
-def ldap_register_view(request):
-    if request.method == "POST":
-        form = KeycloakRegistrationForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            try:
-                ldapservice = LDAPService()
-                ldapservice.create_user(data["username"], data["password"], data["email"], data["firstname"], data["lastname"])
-                messages.success(request, "Registration successful. You may now log in.")
-                return redirect("ldap_login")
-            except Exception as e:
-                messages.error(request, f"Registration failed: {e}")
-    else:
-        form = KeycloakRegistrationForm()
-    return render(request, "lesgrandsvoisins/admin/register.html", {"form": form, 'title': 'S\'enregistrer'})
+# def ldap_register_view(request):
+#     if request.method == "POST":
+#         form = KeycloakRegistrationForm(request.POST)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             try:
+#                 ldapservice = LDAPService()
+#                 ldapservice.create_user(data["username"], data["password"], data["email"], data["firstname"], data["lastname"])
+#                 messages.success(request, "Registration successful. You may now log in.")
+#                 return redirect("keycloak_login")
+#             except Exception as e:
+#                 messages.error(request, f"Registration failed: {e}")
+#     else:
+#         form = KeycloakRegistrationForm()
+#     return render(request, "lesgrandsvoisins/admin/register.html", {"form": form, 'title': 'S\'enregistrer'})
 
 def check_username(request):
     username = request.GET.get("username", "").strip()
