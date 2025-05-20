@@ -19,6 +19,6 @@ pypdf2
 pyscss
 python-dotenv
 python-keycloak
-python-ldap
+# python-ldap
 wagtail
 wagtail-modeladmin
