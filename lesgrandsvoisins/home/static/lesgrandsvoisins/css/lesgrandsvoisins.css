@@ -82,7 +82,7 @@ html[data-theme='dark'] button {
     margin: 0 auto;
 }
 
-.lgv-home-content {
+/* .lgv-home-content {
     column-count: 2;
 }
 
@@ -90,7 +90,7 @@ html[data-theme='dark'] button {
     .lgv-home-content {
         column-count: 1;
     }
-}
+} */
 
 /* ul {
     @apply list-inside;
