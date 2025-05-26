@@ -1,5 +1,5 @@
 body {
-    font-family: 'fira-sans';
+    font-family: 'golos-ui';
 }
 
 body label {
@@ -25,6 +25,10 @@ form {
     text-align: center;
 }
 
+a:hover {
+    font-weight: bolder;
+    font-style: italic;
+}
 
 h1,
 h2,
@@ -76,6 +80,16 @@ html[data-theme='dark'] button {
 
 .prose {
     margin: 0 auto;
+}
+
+.lgv-home-content {
+    column-count: 2;
+}
+
+@media (width < 800px) {
+    .lgv-home-content {
+        column-count: 1;
+    }
 }
 
 /* ul {

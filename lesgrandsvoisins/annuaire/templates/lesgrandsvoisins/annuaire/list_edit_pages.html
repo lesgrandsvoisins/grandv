@@ -1,0 +1,45 @@
+{% extends "wagtailadmin/base.html" %}
+
+{% block content %}
+    <div class="nice-padding">
+        <h1>Your Editable Pages</h1>
+        <p class="help-block">Showing all pages you can edit (excluding root page ID=0)</p>
+        
+        {% if pages %}
+            <table class="listing">
+                <thead>
+                    <tr>
+                        <th class="title">Title</th>
+                        <th>URL Path</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for page in pages %}
+                        <tr>
+                            <td class="title">
+                                <a href="{% url 'wagtailadmin_pages:edit' page.id %}">
+                                    {{ page.title }}
+                                </a>
+                            </td>
+                            <td>{{ page.url_path }}</td>
+                            <td>{{ page.content_type.model_class.get_verbose_name }}</td>
+                            <td>
+                                <a href="{% url 'wagtailadmin_pages:edit' page.id %}" 
+                                   class="button button-small">Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="help-block">
+                <p>No editable pages found (excluding root page ID=0).</p>
+                {% if not user.has_perm('wagtailadmin.access_admin') %}
+                    <p>You may need additional permissions to edit pages.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

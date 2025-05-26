@@ -15,7 +15,6 @@ import os
 import dj_database_url  # Pour un syntaxe différent de base de données
 from dotenv import load_dotenv  # Pour les variables d'.env
 
-
 # from allauth.account.signals import user_signed_up
 # from django.contrib.auth.models import Group
 
@@ -171,6 +170,17 @@ LDAP_CONFIG = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    ]
+
+if DEBUG_TOOLBAR:
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
+    MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ]
+
+MIDDLEWARE += [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -181,6 +191,9 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware', # For automatic language prefix
     "allauth.account.middleware.AccountMiddleware",
 ]
+
+# For DEBUG ou DEBUG_TOOLBAR
+INTERNAL_IPS = ["127.0.0.1", "localhost", "0.0.0.0"]
 
 ROOT_URLCONF = 'settings.urls'
 
@@ -211,15 +224,6 @@ TEMPLATES = [
 
 
 
-# if DEBUG and "localhost" in HOST_NAME:
-if DEBUG_TOOLBAR:
-    INSTALLED_APPS += [
-        'debug_toolbar',
-    ];
-    MIDDLEWARE += [
-        "debug_toolbar.middleware.DebugToolbarMiddleware",
-    ]
-    INTERNAL_IPS = ["127.0.0.1", "localhost "]
 
 
 WSGI_APPLICATION = 'settings.wsgi.application'
@@ -354,17 +358,22 @@ LOGGING = {
             "level": "INFO",
             "propagate": False,
         },
+        "openid_logger": {
+            "handlers": ["log_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
     },
 }
 
 
-# Base URL to use when referring to full URLs within the Wagtail admin backend -
-# e.g. in notification emails. Don't include '/admin' or a trailing slash
-# Base URL to use when referring to full URLs within the Wagtail admin backend -
-# e.g. in notification emails. Don't include '/admin' or a trailing slash
-WAGTAILADMIN_BASE_URL = f"{os.getenv('HOST_PROTO', 'https')}://{HOST_URL}"
+# # Base URL to use when referring to full URLs within the Wagtail admin backend -
+# # e.g. in notification emails. Don't include '/admin' or a trailing slash
+# # Base URL to use when referring to full URLs within the Wagtail admin backend -
+# # e.g. in notification emails. Don't include '/admin' or a trailing slash
+# WAGTAILADMIN_BASE_URL = f"{os.getenv('HOST_PROTO', 'https')}://{HOST_URL}"
 
 
-HOST_PORT = os.getenv("HOST_PORT", "")
-if HOST_PORT != "":
-    WAGTAILADMIN_BASE_URL = f"{WAGTAILADMIN_BASE_URL}:{HOST_PORT}"
+# HOST_PORT = os.getenv("HOST_PORT", "")
+# if HOST_PORT != "":
+#     WAGTAILADMIN_BASE_URL = f"{WAGTAILADMIN_BASE_URL}:{HOST_PORT}"

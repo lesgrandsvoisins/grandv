@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+<html>
+  <head>
+    <title>{{ title }}</title>
+  </head>
+<body>
+  {% block content %}
+  <h1 class="text-center">{{ page.title }}</h1>
+  <p class="text-center text-2xl "><i>Le Magazine des Grands Voisins</i></p>
+<article class="prose dark:prose-invert lgv-home-content">
+  {{ page.content | richtext}}
+</article>  
+  <h2 class="text-center mt-8">Applications</h2>
+  {% include "lesgrandsvoisins/admin/includes/applications.html" %}
+  {% endblock content %}
+  </body>
+</html>

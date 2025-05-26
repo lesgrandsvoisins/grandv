@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Pages Accessible to {{ user.username }}</h1>
+    
+    <ul>
+        {% for page in pages %}
+            <li>
+                <a href="{{ page.url }}">{{ page.title }}</a>
+                <small>({{ page.content_type.model_class.get_verbose_name }})</small>
+            </li>
+        {% empty %}
+            <li>No accessible pages found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}from django.urls import path
+from .views import list_accessible_pages
+
+urlpatterns = [
+    path('my-pages/', list_accessible_pages, name='accessible_pages'),
+]

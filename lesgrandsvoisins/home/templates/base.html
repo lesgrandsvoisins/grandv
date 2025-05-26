@@ -1,4 +1,4 @@
-{% load static %}
+{% load static wagtailcore_tags %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,12 +11,12 @@
           rel="stylesheet" />
     <link href="{% static 'lesgrandsvoisins/fonts/fira-sans/font.css' %}"
           rel="stylesheet" />
-    {% comment %}
         <link href="{% static 'lesgrandsvoisins/fonts/fengardo/font.css' %}" rel="stylesheet" />
         <link href="{% static 'lesgrandsvoisins/fonts/golos-text/font.css' %}" rel="stylesheet" />
         <link href="{% static 'lesgrandsvoisins/fonts/golos-ui/font.css' %}" rel="stylesheet" />
         <link href="{% static 'lesgrandsvoisins/fonts/literata/font.css' %}" rel="stylesheet" />
         <link href="{% static 'lesgrandsvoisins/fonts/pt-mono/font.css' %}" rel="stylesheet" />
+    {% comment %}
     {% endcomment %}
     <link href="{% static 'lesgrandsvoisins/css/tailwind.css' %}"
           rel="stylesheet" />
@@ -38,14 +38,31 @@
               document.documentElement.setAttribute('data-theme', localStorage.theme);
             }
           </script>
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'lesgrandsvoisins/images/favicon/apple-icon-57x57.png'%}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'lesgrandsvoisins/images/favicon/apple-icon-60x60.png'%}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'lesgrandsvoisins/images/favicon/apple-icon-72x72.png'%}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'lesgrandsvoisins/images/favicon/apple-icon-76x76.png'%}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'lesgrandsvoisins/images/favicon/apple-icon-114x114.png'%}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'lesgrandsvoisins/images/favicon/apple-icon-120x120.png'%}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'lesgrandsvoisins/images/favicon/apple-icon-144x144.png'%}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'lesgrandsvoisins/images/favicon/apple-icon-152x152.png'%}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'lesgrandsvoisins/images/favicon/apple-icon-180x180.png'%}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'lesgrandsvoisins/images/favicon/android-icon-192x192.png'%}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'lesgrandsvoisins/images/favicon/favicon-32x32.png'%}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'lesgrandsvoisins/images/favicon/favicon-96x96.png'%}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'lesgrandsvoisins/images/favicon/favicon-16x16.png'%}">
+    {% comment %} <link rel="manifest" href="{% static 'lesgrandsvoisins/images/favicon/manifest.json">
+    <meta'%} name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff"> {% endcomment %}
     {% block end_head %}
     {% endblock end_head %}
   </head>
   <body class="bg-gray-50 text-gray-800 dark:text-gray-50 dark:bg-gray-800 m-8">
     {% block start_body %}
     {% endblock start_body %}
+    <a href="/"><img src="{% static 'lesgrandsvoisins/images/logo_lesgrandsvoisins_600_72.inkscape.svg' %}"></a>
     <nav class="flex gap-2 w-full justify-center prose dark:prose-invert">
-      <a href="/">Home</a>
       {% comment %}
       <button
     type="button"
@@ -57,28 +74,43 @@
       
       {% if 'username' in request.session %}
         <a href="{% url 'lesgrandsvoisins_dashboard' %}">{{ request.session.username }}</a>
-        <a href="{% url 'ldap_logout' %}">Déconnexion</a>
+        {% comment %} <a href="{% url 'ldap_logout' %}">Déconnexion</a> {% endcomment %}
       {% else %}
         {% comment %} <a href="{% url 'keycloak_login' %}">Connexion</a> {% endcomment %}
          <div>Connexion (à venir)</div>
         <a href="{% url 'keycloak_register' %}">S'enregistrer</a>
       {% endif %}
       </nav>
-      <hr />
+      <hr class="mb-2"/>
       {% block content %}
       {% endblock content %}
-      <hr />
+      <hr class="mt-4" />
       <footer class="md:flex">
         {% block footer %}
-        <div class="w-1/1 md:w-1/2">
+        {% for eachfooter in footers %}
+          {% for content in eachfooter.contents %}
+          <div class="w-1/1 md:w-1/2  text-center">
+            {% include_block content %}
+          </div>
+          {% endfor %}
+        {% endfor %}
+        {% comment %} 
+        <div class="w-1/1 md:w-1/2  text-center">
+          {{ footer.content | richtext}}
+        </div>
+        {% endfor %}
+        {% endcomment %} 
+        {% comment %} 
+
+        <div class="w-1/1 md:w-1/2 text-center">
           <h2>Les Grands Voisins</h2>
           <p>
             Site de communs communautaires: <a href="https://www.lesgrandsvoisins.com">lesgrandsvoisins.com</a>
           </p>
         </div>
-        <div class="w-1/1 md:w-1/2">
+        <div class="w-1/1 md:w-1/2  text-center">
           <h3>Rubriques des Grands Voisins</h3>
-          <div class="flex gap-3 flex-wrap items-center">
+          <div class="flex gap-3 flex-wrap items-center justify-center">
             <div>
               <a href="https://www.lesgrandsvoisins.com/fr/annuaire/">Annuaire</a>
             </div>
@@ -95,8 +127,9 @@
               <a href="https://www.lesgv.com/fr/">Apps</a>
             </div>
           </div>
-          {% endblock footer %}
-        </div>
+          
+        </div> {% endcomment %}
+      {% endblock footer %}
       </footer>
       <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
       {% block end_body %}

@@ -16,3 +16,14 @@ Ecans actuellement implémentés sont :
 ## Icons
 
 <https://feathericons.com/>
+
+## Intégration de bibliothèques externes
+
+### Python-Keycloak
+
+Python-Keycloak
+
+https://stackademic.com/blog/integrating-keycloak-with-django-7ae39abe3a0b
+
+https://pypi.org/project/python-keycloak/
+

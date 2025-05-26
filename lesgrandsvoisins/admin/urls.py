@@ -16,5 +16,3 @@ urlpatterns += [
     path("register/", keycloak_register_view, name="keycloak_register"),
     path("ajax/check-username/", check_username, name="check_username")
 ]
-
-
