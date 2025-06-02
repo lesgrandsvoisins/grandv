@@ -17,13 +17,33 @@ class Footer(models.Model):
     class Meta:
         verbose_name_plural = 'Footers'
 
+def GetCommonContext(context):
+  context["footers"] = Footer.objects.all()
+  return context
+
 class HomePage(Page):
   content = RichTextField(blank=True)
+  subtitle = RichTextField(blank=True, max_length=1024)
+  intro = RichTextField(blank=True)
 
-  content_panels = Page.content_panels + [ FieldPanel("content") ]
+
+  content_panels = Page.content_panels + [ FieldPanel("content"), FieldPanel("intro"), FieldPanel("subtitle"),  ]
 
   def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        context["apps"] = Application.objects.all().order_by("title")
-        context["footers"] = Footer.objects.all()
-        return context
+    context = super().get_context(request, *args, **kwargs)
+    context["apps"] = Application.objects.all().order_by("title")
+    context = GetCommonContext(context)
+    return context
+
+class ContentPage(Page):
+  content = RichTextField(blank=True)
+  subtitle = RichTextField(blank=True, max_length=1024)
+  intro = RichTextField(blank=True)
+
+  content_panels = Page.content_panels + [ FieldPanel("content"), FieldPanel("intro"), FieldPanel("subtitle"),  ]
+
+  def get_context(self, request, *args, **kwargs):
+    context = super().get_context(request, *args, **kwargs)
+    context += GetCommonContext(context)
+    return context
+  
