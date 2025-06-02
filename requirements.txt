@@ -9,7 +9,7 @@ django-taggit
 dotenv
 gunicorn
 jwt
-libsass
+libsass 
 pillow
 pip
 pq
